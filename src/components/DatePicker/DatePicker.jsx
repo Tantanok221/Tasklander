@@ -34,15 +34,40 @@ const DatePicker = () => {
   const StartOfThisMonthIndex = todayIndex - nowDay + 1;
   const totalDate = getDaysInMonth(today);
   let DayOfWeek = getDay(AllOfThisYear[todayIndex]);
+  let DayOfWeekMonthStart = getDay(AllOfThisYear[StartOfThisMonthIndex]);
   if (DayOfWeek === 0) DayOfWeek = 7;
-  console.log(DayOfWeek)
+  
   // 0 represent sunday, 1 represent monday so on and so forth
   const [date, setDate] = React.useState("");
-  let globalIterate = 0;
+  // Iterate is to count total iterate that we have done
+  // Iterate2D is to count how many iterate that we have done in 2D array
+  // Counter is to count how many time we have insert new number into one array
+  let iterate = 0;
+  let iterate2D = 0;
+  let counter = 0;
+  let ArrayOfDay = [[],[],[],[],[],[]];
   
+  while(iterate < 31 + DayOfWeekMonthStart - 1){ 
+    if(iterate < DayOfWeekMonthStart - 1){
+      ArrayOfDay[0].push("")
+      iterate++;
+      counter++;
+      continue;
+    }
+
+    ArrayOfDay[iterate2D].push(iterate - DayOfWeekMonthStart + 2)
+    
+    
+    iterate++;
+    counter++;
+    if(counter === 7) {
+      iterate2D++
+      counter = 0;
+    };
+  }
   let ArrayOfQuater = ["Q1", "Q2", "Q3", "Q4"];
   let ArrayOfWeek = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-  
+  console.log(ArrayOfDay)
   return (
     <ToggleGroup.Root
       type="single"
