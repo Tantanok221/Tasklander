@@ -1,0 +1,16 @@
+@use "../../styles/abstract/" as *;
+
+.highlight {
+  color: $white;
+  font-family: "Poppins";
+}
+  
+
+.nonHighlight {
+  color: #B3B3B3;
+}
+
+.row1 {
+  display: flex;
+  justify-content: center;
+}
