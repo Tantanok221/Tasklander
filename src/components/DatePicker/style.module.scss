@@ -1,16 +1,56 @@
 @use "../../styles/abstract/" as *;
 
+// Text related styling
+.text {
+  font-family: $font;
+  font-size: 1.5rem;
+}
+.nonHighlight {
+  color: $iconGray-onHold;
+  font-style: 500;
+}
 .highlight {
   color: $white;
-  font-family: "Poppins";
+  font-weight: 600;
 }
-  
+.gray {
+  font-size: 1rem;
+  color: $iconGray;
+  font-weight: 600;
 
-.nonHighlight {
-  color: #B3B3B3;
 }
 
-.row1 {
+// Component related styling
+
+.body {
+  background-color: $background;
+  border-radius: 0.5rem;
+  border: 2px solid $timedisplay-stroke;  
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+}
+
+
+
+.row:nth-child(1) {
+  gap: 2rem;
+}
+
+.row:nth-child(2) {
+  justify-content: space-between;
+}
+
+.row:nth-child(3) {
+  justify-content: space-between;
+}
+
+.row {
+  padding: 1.5rem 2rem;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  
+  border-bottom: 2px solid $obvStroke;
 }
