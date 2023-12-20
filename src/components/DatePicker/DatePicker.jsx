@@ -87,7 +87,7 @@ const DatePicker = () => {
         <div className={`${style.row}`}>
           <FaAngleLeft className={style.icon} />
           <ToggleGroup.Item value={nowYear} className={style.button}>
-            <div className={`${style.highlight} ${style.text}`}>{nowYear}</div>
+            <div className={`${style.highlight} ${style.clickable} ${style.text}`}>{nowYear}</div>
           </ToggleGroup.Item>
           {ArrayOfQuater.map((item, index) => {
             return (
@@ -96,7 +96,7 @@ const DatePicker = () => {
                 value={item}
                 className={style.button}
               >
-                <div className={`${style.text} ${style.quater} `}>
+                <div className={`${style.text} ${style.clickable} ${style.quater} `}>
                   {item}
                 </div>
               </ToggleGroup.Item>
@@ -108,9 +108,11 @@ const DatePicker = () => {
           <FaAngleLeft className={style.icon} />
           <ToggleGroup.Item
             value={nowFormatMonth}
-            className={`${style.highlight} ${style.text} ${style.button}`}
+            className={`${style.button}`}
           >
+            <div className={`${style.highlight} ${style.clickable} ${style.text} `}>
             {nowFormatMonth}
+            </div>
           </ToggleGroup.Item>
           <FaAngleRight className={style.icon} />
         </div>
@@ -124,8 +126,8 @@ const DatePicker = () => {
                   key={index}
                   className={`${style.button} ${style.textContainer}`}
                 >
-                  <div className={`${style.nonHighlight} ${style.text}`}>
-                    W{item}
+                  <div className={`${style.nonHighlight} ${style.weekItem}  ${style.text}`}>
+                    {"W"+item}
                   </div>{" "}
                 </ToggleGroup.Item>
               );
