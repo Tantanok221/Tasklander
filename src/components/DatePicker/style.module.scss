@@ -46,7 +46,9 @@
 .icon:hover {
   background-color: $onHold;
 }
-
+.icon:active {
+  background-color: $onClick;
+}
 // Component related styling
 
 .body {
@@ -63,8 +65,10 @@
   :hover {
     background-color: $onHold;
   }
+  :active {
+    background-color: $onClick;
+  }
 }
-
 
 // 3rd Row(Week and Date) related styling
 .week {
@@ -131,7 +135,9 @@
 .quickSelect:hover {
   background-color: $onHold;
 }
-
+.quickSelect:active {
+  background-color: $onClick;
+}
 
 // 5th row
 .removeDate {
@@ -147,7 +153,9 @@
 .removeDate:hover {
   background-color: $onHold;
 }
-
+.removeDate:active {
+  background-color: $onClick;
+}
 // Row related styling
 .row:nth-child(1) {
   gap: 1.5rem;
