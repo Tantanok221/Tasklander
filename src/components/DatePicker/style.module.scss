@@ -3,13 +3,20 @@
 // Text related styling
 .text {
   font-family: $font;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 .nonHighlight {
   color: $iconGray-onHold;
   font-weight: 500;
   font-size: 1rem;
 }
+
+.quater {
+  color: $iconGray-onHold;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
 .highlight {
   color: $white;
   font-weight: 600;
@@ -99,15 +106,16 @@
 // Row related styling
 .row:nth-child(1) {
   gap: 2rem;
+  align-items: center;
 }
 
 .row:nth-child(2) {
   justify-content: space-between;
+  align-items: center;
 }
 
 .row:nth-child(3) {
-  gap: 2rem;
-  
+  justify-content: space-between;
 }
 
 .row:nth-child(4) {

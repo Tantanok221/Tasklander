@@ -96,7 +96,7 @@ const DatePicker = () => {
                 value={item}
                 className={style.button}
               >
-                <div className={`${style.nonHighlight} ${style.text}`}>
+                <div className={`${style.text} ${style.quater} `}>
                   {item}
                 </div>
               </ToggleGroup.Item>
