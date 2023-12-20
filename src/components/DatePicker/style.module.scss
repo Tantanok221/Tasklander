@@ -76,6 +76,16 @@
   line-height: normal;
 }
 
+// 4th row
+.quickSelect {
+  font-size: 1rem;
+  font-family: $font;
+  font-weight: 500;
+  text-align: center;
+  color: $white;
+  padding: 0.5rem 1.5rem;
+}
+
 // Row related styling
 .row:nth-child(1) {
   gap: 2rem;
@@ -87,6 +97,11 @@
 
 .row:nth-child(3) {
   gap: 2rem;
+  
+}
+
+.row:nth-child(4) {
+  justify-content: space-between;
   
 }
 

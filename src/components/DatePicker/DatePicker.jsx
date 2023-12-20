@@ -153,6 +153,7 @@ const DatePicker = () => {
                         </ToggleGroup.Item>
                       );
                     }
+                    if(item === "") return (<div className={style.textContainer}></div>)
                     return (
                       <ToggleGroup.Item key={"date"+i}className={`${style.button} ${style.textContainer}`}>
                         <div className={`${style.nonHighlight}`}>{item}</div>
@@ -163,6 +164,11 @@ const DatePicker = () => {
               );
             })}
           </div>
+        </div>
+        <div className={style.row}>
+          <div className={`${style.quickSelect}`}>today</div>
+          <div className={`${style.quickSelect}`}>tommorow</div>
+          <div className={`${style.quickSelect}`}>this week</div>
         </div>
       </IconContext.Provider>
     </ToggleGroup.Root>
