@@ -39,7 +39,7 @@ const DatePicker = () => {
   let DayOfWeek = getDay(AllOfThisYear[todayIndex]);
   let DayOfWeekMonthStart = getDay(AllOfThisYear[StartOfThisMonthIndex]);
   if (DayOfWeek === 0) DayOfWeek = 7;
-  
+
   const [date, setDate] = React.useState(today);
   // Iterate is to count total iterate that we have done
   // Iterate2D is to count how many iterate that we have done in 2D array
@@ -47,34 +47,33 @@ const DatePicker = () => {
   let iterate = 0;
   let iterate2D = 0;
   let counter = 0;
-  let ArrayOfDay = [[],[],[],[],[],[]];
+  let ArrayOfDay = [[], [], [], [], [], []];
   // Create a 2D array to store all the date of the month
-  while(iterate < 31 + DayOfWeekMonthStart - 1){ 
-    if(iterate < DayOfWeekMonthStart - 1){
-      ArrayOfDay[0].push("")
+  while (iterate < 31 + DayOfWeekMonthStart - 1) {
+    if (iterate < DayOfWeekMonthStart - 1) {
+      ArrayOfDay[0].push("");
       iterate++;
       counter++;
       continue;
     }
 
-    ArrayOfDay[iterate2D].push(iterate - DayOfWeekMonthStart + 2)
-    
-    
+    ArrayOfDay[iterate2D].push(iterate - DayOfWeekMonthStart + 2);
+
     iterate++;
     counter++;
-    if(counter === 7) {
-      iterate2D++
+    if (counter === 7) {
+      iterate2D++;
       counter = 0;
-    };
+    }
   }
-  if(ArrayOfDay[5].length === 0) ArrayOfDay.pop();
+  if (ArrayOfDay[5].length === 0) ArrayOfDay.pop();
   let ArrayWeek = [];
-  for(let i = 0; i < ArrayOfDay.length; i++){
-    ArrayWeek.push(nowWeek-nowWeekOfMonth+i+1)
+  for (let i = 0; i < ArrayOfDay.length; i++) {
+    ArrayWeek.push(nowWeek - nowWeekOfMonth + i + 1);
   }
   let ArrayOfQuater = ["Q1", "Q2", "Q3", "Q4"];
   let WeekRow = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-  console.log(ArrayWeek,ArrayOfDay)
+  console.log(ArrayWeek, ArrayOfDay);
   return (
     <ToggleGroup.Root
       type="single"
@@ -116,6 +115,23 @@ const DatePicker = () => {
           <FaAngleRight className={style.icon} />
         </div>
         <div className={`${style.row}`}>
+          <div className={style.week}>
+            <div className={`${style.text} ${style.gray}`}>WEEKS</div>
+            {ArrayWeek.map((item, index) => {
+              return (
+                <ToggleGroup.Item
+                  value={"W" + item}
+                  key={index}
+                  className={`${style.button} ${style.textContainer}`}
+                >
+                  <div className={`${style.nonHighlight} ${style.text}`}>
+                    W{item}
+                  </div>{" "}
+                </ToggleGroup.Item>
+              );
+            })}
+          </div>
+          <div className={style.divider}></div>
           <div className={style.day}>
             <div className={style.dayRow}>
               {WeekRow.map((item, index) => {
@@ -126,7 +142,26 @@ const DatePicker = () => {
                 );
               })}
             </div>
-            
+            {ArrayOfDay.map((array, index) => {
+              return (
+                <div className={style.dayRow} key={"dayRow"+index}>
+                  {array.map((item, i) => {
+                    if(i === 6 || i === 5){
+                      return (
+                        <ToggleGroup.Item key={"date"+i}className={`${style.button} ${style.textContainer} ${style.red}`}>
+                          <div className={`${style.gray}`}>{item}</div>
+                        </ToggleGroup.Item>
+                      );
+                    }
+                    return (
+                      <ToggleGroup.Item key={"date"+i}className={`${style.button} ${style.textContainer}`}>
+                        <div className={`${style.nonHighlight}`}>{item}</div>
+                      </ToggleGroup.Item>
+                    );
+                  })}
+                </div>
+              );
+            })}
           </div>
         </div>
       </IconContext.Provider>
