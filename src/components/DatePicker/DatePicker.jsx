@@ -170,6 +170,9 @@ const DatePicker = () => {
           <div className={`${style.quickSelect}`}>tommorow</div>
           <div className={`${style.quickSelect}`}>this week</div>
         </div>
+        <div className={style.row}>
+          <div className={style.removeDate}>Remove Date</div>
+        </div>
       </IconContext.Provider>
     </ToggleGroup.Root>
   );
