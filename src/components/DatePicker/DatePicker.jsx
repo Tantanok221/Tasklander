@@ -25,7 +25,8 @@ const DatePicker = () => {
   const [today, setDate] = React.useState(new Date());
   console.log(today)
   const nowDay = getDate(today);
-  const nowWeek = getWeek(today);
+  const nowWeek = getWeek(today); // BUG: Sometime have weird counting bug
+  const nowWeekOfStartMonth = getWeek(startOfMonth(today));
   const nowWeekOfMonth = getWeekOfMonth(today);
   const nowFormatMonth = format(today, "MMMM");
   const nowYear = getYear(today);
@@ -41,7 +42,7 @@ const DatePicker = () => {
   let DayOfWeek = getDay(AllOfThisYear[todayIndex]);
   let DayOfWeekMonthStart = getDay(AllOfThisYear[StartOfThisMonthIndex]);
   if (DayOfWeek === 0) DayOfWeek = 7;
-
+  if (DayOfWeekMonthStart === 0) DayOfWeekMonthStart = 7;
   
   // Iterate is to count total iterate that we have done
   // Iterate2D is to count how many iterate that we have done in 2D array
@@ -51,6 +52,7 @@ const DatePicker = () => {
   let counter = 0;
   let ArrayOfDay = [[], [], [], [], [], []];
   // Create a 2D array to store all the date of the month
+  console.log(DayOfWeekMonthStart)
   while (iterate < 31 + DayOfWeekMonthStart - 1) {
     if (iterate < DayOfWeekMonthStart - 1) {
       ArrayOfDay[0].push("");
@@ -74,11 +76,11 @@ const DatePicker = () => {
   }
   let ArrayWeek = [];
   for (let i = 0; i < ArrayOfDay.length; i++) {
-    ArrayWeek.push(nowWeek - nowWeekOfMonth + i + 1);
+    ArrayWeek.push(nowWeekOfStartMonth + i);
   }
   let ArrayOfQuater = ["Q1", "Q2", "Q3", "Q4"];
   let WeekRow = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-  console.log(ArrayWeek, ArrayOfDay);
+  
   return (
     <ToggleGroup.Root
       type="single"
