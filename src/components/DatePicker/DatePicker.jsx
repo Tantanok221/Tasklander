@@ -21,7 +21,9 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
 const DatePicker = () => {
-  const today = new Date();
+  
+  const [today, setDate] = React.useState(new Date());
+  console.log(today)
   const nowDay = getDate(today);
   const nowWeek = getWeek(today);
   const nowWeekOfMonth = getWeekOfMonth(today);
@@ -40,7 +42,7 @@ const DatePicker = () => {
   let DayOfWeekMonthStart = getDay(AllOfThisYear[StartOfThisMonthIndex]);
   if (DayOfWeek === 0) DayOfWeek = 7;
 
-  const [date, setDate] = React.useState(today);
+  
   // Iterate is to count total iterate that we have done
   // Iterate2D is to count how many iterate that we have done in 2D array
   // Counter is to count how many time we have insert new number into one array
@@ -67,6 +69,9 @@ const DatePicker = () => {
     }
   }
   if (ArrayOfDay[5].length === 0) ArrayOfDay.pop();
+  while(ArrayOfDay[ArrayOfDay.length - 1].length < 7){
+    ArrayOfDay[ArrayOfDay.length - 1].push("");
+  }
   let ArrayWeek = [];
   for (let i = 0; i < ArrayOfDay.length; i++) {
     ArrayWeek.push(nowWeek - nowWeekOfMonth + i + 1);
@@ -77,15 +82,17 @@ const DatePicker = () => {
   return (
     <ToggleGroup.Root
       type="single"
-      value={date}
+      value={today}
       className={style.body}
-      onValueChange={(date) => {
-        if (date) setDate(date);
+      onValueChange={(today) => {
+        if (today) setDate(today);
       }}
     >
       <IconContext.Provider value={{ color: "#686868", size: "1.5rem" }}>
         <div className={`${style.row}`}>
-          <FaAngleLeft className={style.icon} />
+          <FaAngleLeft className={style.icon} onClick={() => {
+            setDate(new Date(getYear(today)- 1, getMonth(today) , getDate(today)))
+          }} />
           <ToggleGroup.Item value={nowYear} className={style.button}>
             <div className={`${style.highlight} ${style.clickable} ${style.text}`}>{nowYear}</div>
           </ToggleGroup.Item>
@@ -102,10 +109,14 @@ const DatePicker = () => {
               </ToggleGroup.Item>
             );
           })}
-          <FaAngleRight className={style.icon} />
+          <FaAngleRight className={style.icon} onClick={() => {
+            setDate(new Date(getYear(today)+ 1, getMonth(today) , getDate(today)))
+          }}/>
         </div>
         <div className={`${style.row}`}>
-          <FaAngleLeft className={style.icon} />
+          <FaAngleLeft className={style.icon} onClick={() => {
+            setDate(new Date(getYear(today), getMonth(today)- 1 , getDate(today)))
+          }} />
           <ToggleGroup.Item
             value={nowFormatMonth}
             className={`${style.button}`}
@@ -114,7 +125,9 @@ const DatePicker = () => {
             {nowFormatMonth}
             </div>
           </ToggleGroup.Item>
-          <FaAngleRight className={style.icon} />
+          <FaAngleRight onClick={() => {
+            setDate(new Date(getYear(today), getMonth(today)+ 1 , getDate(today)))
+          }} className={style.icon} />
         </div>
         <div className={`${style.row}`}>
           <div className={style.week}>
