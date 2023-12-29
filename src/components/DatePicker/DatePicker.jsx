@@ -20,13 +20,12 @@ import style from "./style.module.scss";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
-const DatePicker = ({globalDate,setGlobalDate}) => {
-  
+const DatePicker = ({ globalDate, setGlobalDate }) => {
   const [today, setDate] = React.useState(new Date());
   const nowDay = getDate(today);
-  const nowWeek = getWeek(today); // BUG: Sometime have weird counting bug
-  
-  const nowWeekOfStartMonth = getWeek(startOfMonth(today));
+  const nowWeek = getWeek(today, { weekStartsOn: 1}); 
+
+  const nowWeekOfStartMonth = getWeek(startOfMonth(today), { weekStartsOn: 1}); // Unsure: Might cause bug, im not sure
   const nowWeekOfMonth = getWeekOfMonth(today);
   const nowFormatMonth = format(today, "MMMM");
   const nowYear = getYear(today);
@@ -43,7 +42,7 @@ const DatePicker = ({globalDate,setGlobalDate}) => {
   let DayOfWeekMonthStart = getDay(AllOfThisYear[StartOfThisMonthIndex]);
   if (DayOfWeek === 0) DayOfWeek = 7;
   if (DayOfWeekMonthStart === 0) DayOfWeekMonthStart = 7;
-  
+
   // Iterate is to count total iterate that we have done
   // Iterate2D is to count how many iterate that we have done in 2D array
   // Counter is to count how many time we have insert new number into one array
@@ -70,7 +69,7 @@ const DatePicker = ({globalDate,setGlobalDate}) => {
     }
   }
   if (ArrayOfDay[5].length === 0) ArrayOfDay.pop();
-  while(ArrayOfDay[ArrayOfDay.length - 1].length < 7){
+  while (ArrayOfDay[ArrayOfDay.length - 1].length < 7) {
     ArrayOfDay[ArrayOfDay.length - 1].push("");
   }
   let ArrayWeek = [];
@@ -79,7 +78,7 @@ const DatePicker = ({globalDate,setGlobalDate}) => {
   }
   let ArrayOfQuater = ["Q1", "Q2", "Q3", "Q4"];
   let WeekRow = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-  
+
   return (
     <ToggleGroup.Root
       type="single"
@@ -91,44 +90,72 @@ const DatePicker = ({globalDate,setGlobalDate}) => {
     >
       <IconContext.Provider value={{ color: "#686868", size: "1.5rem" }}>
         <div className={`${style.row}`}>
-          <FaAngleLeft className={style.icon} onClick={() => {
-            setDate(new Date(getYear(today)- 1, getMonth(today) , getDate(today)))
-          }} />
+          <FaAngleLeft
+            className={style.icon}
+            onClick={() => {
+              setDate(
+                new Date(getYear(today) - 1, getMonth(today), getDate(today))
+              );
+            }}
+          />
           <ToggleGroup.Item value={nowYear} className={style.button}>
-            <div className={`${style.highlight} ${style.clickable} ${style.text}`}>{nowYear}</div>
+            <div
+              className={`${style.highlight} ${style.clickable} ${style.text}`}
+            >
+              {nowYear}
+            </div>
           </ToggleGroup.Item>
           {ArrayOfQuater.map((item, index) => {
             return (
               <ToggleGroup.Item
                 key={index}
-                value={nowYear+" "+item}
+                value={nowYear + " " + item}
                 className={style.button}
               >
-                <div className={`${style.text} ${style.clickable} ${style.quater} `}>
+                <div
+                  className={`${style.text} ${style.clickable} ${style.quater} `}
+                >
                   {item}
                 </div>
               </ToggleGroup.Item>
             );
           })}
-          <FaAngleRight className={style.icon} onClick={() => {
-            setDate(new Date(getYear(today)+ 1, getMonth(today) , getDate(today)))
-          }}/>
+          <FaAngleRight
+            className={style.icon}
+            onClick={() => {
+              setDate(
+                new Date(getYear(today) + 1, getMonth(today), getDate(today))
+              );
+            }}
+          />
         </div>
         <div className={`${style.row}`}>
-          <FaAngleLeft className={style.icon} onClick={() => {
-            setDate(new Date(getYear(today), getMonth(today)- 1 , getDate(today)))
-          }} />
+          <FaAngleLeft
+            className={style.icon}
+            onClick={() => {
+              setDate(
+                new Date(getYear(today), getMonth(today) - 1, getDate(today))
+              );
+            }}
+          />
           <ToggleGroup.Item
-            value={nowYear +" "+nowFormatMonth}
+            value={nowYear + " " + nowFormatMonth}
             className={`${style.button}`}
           >
-            <div className={`${style.highlight} ${style.clickable} ${style.text} `}>
-            {nowFormatMonth}
+            <div
+              className={`${style.highlight} ${style.clickable} ${style.text} `}
+            >
+              {nowFormatMonth}
             </div>
           </ToggleGroup.Item>
-          <FaAngleRight onClick={() => {
-            setDate(new Date(getYear(today), getMonth(today)+ 1 , getDate(today)))
-          }} className={style.icon} />
+          <FaAngleRight
+            onClick={() => {
+              setDate(
+                new Date(getYear(today), getMonth(today) + 1, getDate(today))
+              );
+            }}
+            className={style.icon}
+          />
         </div>
         <div className={`${style.row}`}>
           <div className={style.week}>
@@ -136,12 +163,14 @@ const DatePicker = ({globalDate,setGlobalDate}) => {
             {ArrayWeek.map((item, index) => {
               return (
                 <ToggleGroup.Item
-                  value={nowYear +" W" + item}
+                  value={nowYear + " W" + item}
                   key={index}
                   className={`${style.button} ${style.textContainer}`}
                 >
-                  <div className={`${style.nonHighlight} ${style.weekItem}  ${style.text}`}>
-                    {"W"+item}
+                  <div
+                    className={`${style.nonHighlight} ${style.weekItem}  ${style.text}`}
+                  >
+                    {"W" + item}
                   </div>{" "}
                 </ToggleGroup.Item>
               );
@@ -160,18 +189,27 @@ const DatePicker = ({globalDate,setGlobalDate}) => {
             </div>
             {ArrayOfDay.map((array, index) => {
               return (
-                <div className={style.dayRow} key={"dayRow"+index}>
+                <div className={style.dayRow} key={"dayRow" + index}>
                   {array.map((item, i) => {
-                    if(i === 6 || i === 5){
+                    if (i === 6 || i === 5) {
                       return (
-                        <ToggleGroup.Item value={new Date(nowYear,getMonth(today),item)} key={"date"+i}className={`${style.button} ${style.textContainer} ${style.red}`}>
+                        <ToggleGroup.Item
+                          value={new Date(nowYear, getMonth(today), item)}
+                          key={"date" + i}
+                          className={`${style.button} ${style.textContainer} ${style.red}`}
+                        >
                           <div className={`${style.gray}`}>{item}</div>
                         </ToggleGroup.Item>
                       );
                     }
-                    if(item === "") return (<div className={style.textContainer}></div>)
+                    if (item === "")
+                      return <div className={style.textContainer}></div>;
                     return (
-                      <ToggleGroup.Item value={new Date(nowYear,getMonth(today),item)} key={"date"+i}className={`${style.button} ${style.textContainer}`}>
+                      <ToggleGroup.Item
+                        value={new Date(nowYear, getMonth(today), item)}
+                        key={"date" + i}
+                        className={`${style.button} ${style.textContainer}`}
+                      >
                         <div className={`${style.nonHighlight}`}>{item}</div>
                       </ToggleGroup.Item>
                     );
@@ -182,9 +220,20 @@ const DatePicker = ({globalDate,setGlobalDate}) => {
           </div>
         </div>
         <div className={style.row}>
-          <div className={`${style.quickSelect}`}>today</div>
-          <div className={`${style.quickSelect}`}>tommorow</div>
-          <div className={`${style.quickSelect}`}>this week</div>
+          <div
+            onClick={() => {
+              setGlobalDate(new Date());
+            }}
+            className={`${style.quickSelect}`}
+          >
+            today
+          </div>
+          <div onClick={() => {
+              setGlobalDate(new Date(getYear(new Date()),getMonth(new Date()),getDate(new Date())+1));
+            }} className={`${style.quickSelect}`}>tommorow</div>
+          <div onClick={() => {
+              setGlobalDate(getYear(new Date()) + " W" + getWeek(new Date(),{ weekStartsOn: 1}));
+            }} className={`${style.quickSelect}`}>this week</div>
         </div>
         <div className={style.row}>
           <div className={style.removeDate}>Remove Date</div>
