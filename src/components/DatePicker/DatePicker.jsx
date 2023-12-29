@@ -20,12 +20,12 @@ import style from "./style.module.scss";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
-const DatePicker = () => {
+const DatePicker = ({globalDate,setGlobalDate}) => {
   
   const [today, setDate] = React.useState(new Date());
-  console.log(today)
   const nowDay = getDate(today);
   const nowWeek = getWeek(today); // BUG: Sometime have weird counting bug
+  
   const nowWeekOfStartMonth = getWeek(startOfMonth(today));
   const nowWeekOfMonth = getWeekOfMonth(today);
   const nowFormatMonth = format(today, "MMMM");
@@ -52,7 +52,6 @@ const DatePicker = () => {
   let counter = 0;
   let ArrayOfDay = [[], [], [], [], [], []];
   // Create a 2D array to store all the date of the month
-  console.log(DayOfWeekMonthStart)
   while (iterate < 31 + DayOfWeekMonthStart - 1) {
     if (iterate < DayOfWeekMonthStart - 1) {
       ArrayOfDay[0].push("");
@@ -86,8 +85,8 @@ const DatePicker = () => {
       type="single"
       value={today}
       className={style.body}
-      onValueChange={(today) => {
-        if (today) setDate(today);
+      onValueChange={(value) => {
+        setGlobalDate(value);
       }}
     >
       <IconContext.Provider value={{ color: "#686868", size: "1.5rem" }}>
@@ -102,7 +101,7 @@ const DatePicker = () => {
             return (
               <ToggleGroup.Item
                 key={index}
-                value={item}
+                value={nowYear+" "+item}
                 className={style.button}
               >
                 <div className={`${style.text} ${style.clickable} ${style.quater} `}>
@@ -120,7 +119,7 @@ const DatePicker = () => {
             setDate(new Date(getYear(today), getMonth(today)- 1 , getDate(today)))
           }} />
           <ToggleGroup.Item
-            value={nowFormatMonth}
+            value={nowYear +" "+nowFormatMonth}
             className={`${style.button}`}
           >
             <div className={`${style.highlight} ${style.clickable} ${style.text} `}>
@@ -137,7 +136,7 @@ const DatePicker = () => {
             {ArrayWeek.map((item, index) => {
               return (
                 <ToggleGroup.Item
-                  value={"W" + item}
+                  value={nowYear +" W" + item}
                   key={index}
                   className={`${style.button} ${style.textContainer}`}
                 >
@@ -165,14 +164,14 @@ const DatePicker = () => {
                   {array.map((item, i) => {
                     if(i === 6 || i === 5){
                       return (
-                        <ToggleGroup.Item key={"date"+i}className={`${style.button} ${style.textContainer} ${style.red}`}>
+                        <ToggleGroup.Item value={new Date(nowYear,getMonth(today),item)} key={"date"+i}className={`${style.button} ${style.textContainer} ${style.red}`}>
                           <div className={`${style.gray}`}>{item}</div>
                         </ToggleGroup.Item>
                       );
                     }
                     if(item === "") return (<div className={style.textContainer}></div>)
                     return (
-                      <ToggleGroup.Item key={"date"+i}className={`${style.button} ${style.textContainer}`}>
+                      <ToggleGroup.Item value={new Date(nowYear,getMonth(today),item)} key={"date"+i}className={`${style.button} ${style.textContainer}`}>
                         <div className={`${style.nonHighlight}`}>{item}</div>
                       </ToggleGroup.Item>
                     );
