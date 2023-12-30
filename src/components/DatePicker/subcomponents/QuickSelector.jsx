@@ -1,9 +1,14 @@
 import React from 'react'
 import classNames from "classnames/bind";
 import style from "../style.module.scss";
-import {format,getYear,getDate,getMonth} from 'date-fns'
-const QuickSelector = ({nowWeek,setDate,globalDateWithoutTime,setGlobalDate}) => {
+import {format,getYear,getDate,getMonth, set} from 'date-fns'
+const QuickSelector = ({nowWeek,setDate,setGlobalDate,globalDate,nowYear}) => {
   const sx = classNames.bind(style);
+  const globalDateWithoutTime =
+    typeof globalDate === typeof new Date()
+      ? format(globalDate, "yyyy-MM-dd")
+      : null;
+  console.log(globalDateWithoutTime)
   return (
     <div className={sx("row")}>
           <div
@@ -56,7 +61,7 @@ const QuickSelector = ({nowWeek,setDate,globalDateWithoutTime,setGlobalDate}) =>
                 )
               );
             }}
-            className={sx("quickSelect", {
+            className={sx( {
               active:
                 globalDateWithoutTime ===
                 format(
@@ -67,15 +72,18 @@ const QuickSelector = ({nowWeek,setDate,globalDateWithoutTime,setGlobalDate}) =>
                   ),
                   "yyyy-MM-dd"
                 ),
-            })}
+            },"quickSelect")}
           >
             tommorow
           </div>
           <div
             onClick={() => {
               setGlobalDate(getYear(new Date()) + " W" + nowWeek);
+              setDate(getYear(new Date()) + " W" + nowWeek);
             }}
-            className={sx("quickSelect")}
+            className={sx("quickSelect",  {
+              active: globalDate === getYear(new Date()) + " W" + nowWeek,
+            })}
           >
             this week
           </div>

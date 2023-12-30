@@ -5,7 +5,7 @@ import { IconContext } from "react-icons";
 import style from "../style.module.scss";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import {getYear,getMonth,getDate} from "date-fns"
-export const ChooseYearQ = ({nowYear,setDate,today}) => {
+export const ChooseYearQ = ({globalDate,nowYear,setDate,today}) => {
   let ArrayOfQuater = ["Q1", "Q2", "Q3", "Q4"];
   const sx = classNames.bind(style);
   return (
@@ -18,7 +18,9 @@ export const ChooseYearQ = ({nowYear,setDate,today}) => {
               );
             }}
           />
-          <ToggleGroup.Item value={nowYear} className={sx("button")}>
+          <ToggleGroup.Item value={nowYear} className={sx("button", {
+                  active: globalDate === nowYear,
+                } )}>
             <div className={sx("highlight", "clickable", "text")}>
               {nowYear}
             </div>
@@ -28,7 +30,9 @@ export const ChooseYearQ = ({nowYear,setDate,today}) => {
               <ToggleGroup.Item
                 key={index}
                 value={nowYear + " " + item}
-                className={sx("button")}
+                className={sx("button", {
+                  active: globalDate === nowYear + " " + item,
+                })}
               >
                 <div className={sx("quater", "text", "clickable")}>{item}</div>
               </ToggleGroup.Item>
