@@ -29,7 +29,9 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   const nowWeekOfMonth = getWeekOfMonth(today);
   const nowFormatMonth = format(today, "MMMM");
   const nowYear = getYear(today);
-  const globalDateWithoutTime = globalDate?format(globalDate, "yyyy-MM-dd"): null;
+  const globalDateWithoutTime = globalDate
+    ? format(globalDate, "yyyy-MM-dd")
+    : null;
   const AllOfThisYear = eachDayOfInterval({
     start: new Date(nowYear, 0, 1),
     end: new Date(nowYear, 11, 31),
@@ -181,26 +183,54 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
             </div>
             {ArrayOfDay.map((array, index) => {
               return (
-                <div className={sx("dayRow")} key={"dayRow "+nowFormatMonth+nowYear + index}>
+                <div
+                  className={sx("dayRow")}
+                  key={"dayRow " + nowFormatMonth + nowYear + index}
+                >
                   {array.map((item, i) => {
                     if (i === 6 || i === 5) {
                       return (
                         <ToggleGroup.Item
                           value={new Date(nowYear, getMonth(today), item)}
-                          key={"date "+nowDay+nowFormatMonth+nowYear + i}
-                          className={sx("button", "textContainer", "red", {"active": globalDateWithoutTime === format(new Date(nowYear, getMonth(today), item), "yyyy-MM-dd")} )}
+                          key={"date " + nowDay + nowFormatMonth + nowYear + i}
+                          className={sx("button", "textContainer", "red", {
+                            active:
+                              globalDateWithoutTime ===
+                              format(
+                                new Date(nowYear, getMonth(today), item),
+                                "yyyy-MM-dd"
+                              ),
+                          })}
                         >
                           <div className={sx("gray")}>{item}</div>
                         </ToggleGroup.Item>
                       );
                     }
                     if (item === "")
-                      return <div key={"emptyContainer" +nowFormatMonth+nowYear + i}className={sx("textContainer")}></div>;
+                      return (
+                        <div
+                          key={"emptyContainer" + nowFormatMonth + nowYear + i}
+                          className={sx("textContainer")}
+                        ></div>
+                      );
                     return (
                       <ToggleGroup.Item
                         value={new Date(nowYear, getMonth(today), item)}
-                        key={"dateNonHighlight "+nowDay+nowFormatMonth+nowYear + i}
-                        className={sx("button", "textContainer",{"active": globalDateWithoutTime === format(new Date(nowYear, getMonth(today), item), "yyyy-MM-dd")})}
+                        key={
+                          "dateNonHighlight " +
+                          nowDay +
+                          nowFormatMonth +
+                          nowYear +
+                          i
+                        }
+                        className={sx("button", "textContainer", {
+                          active:
+                            globalDateWithoutTime ===
+                            format(
+                              new Date(nowYear, getMonth(today), item),
+                              "yyyy-MM-dd"
+                            ),
+                        })}
                       >
                         <div className={sx("nonHighlight")}>{item}</div>
                       </ToggleGroup.Item>
@@ -214,12 +244,34 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
         <div className={sx("row")}>
           <div
             onClick={() => {
-              setGlobalDate(new Date(getYear(new Date()),
-              getMonth(new Date()),
-              getDate(new Date())));
+              setGlobalDate(
+                new Date(
+                  getYear(new Date()),
+                  getMonth(new Date()),
+                  getDate(new Date())
+                )
+              );
+              setDate(
+                new Date(
+                  getYear(new Date()),
+                  getMonth(new Date()),
+                  getDate(new Date())
+                )
+              );
               // To avoid having time signature when returning back to GlobalDate
             }}
-            className={sx("quickSelect", {"active": globalDateWithoutTime === format(new Date(nowYear, getMonth(today), nowDay), "yyyy-MM-dd")} )}
+            className={sx("quickSelect", {
+              active:
+                globalDateWithoutTime ===
+                format(
+                  new Date(
+                    getYear(new Date()),
+                    getMonth(new Date()),
+                    getDate(new Date())
+                  ),
+                  "yyyy-MM-dd"
+                ),
+            })}
           >
             today
           </div>
@@ -232,8 +284,26 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                   getDate(new Date()) + 1
                 )
               );
+              setDate(
+                new Date(
+                  getYear(new Date()),
+                  getMonth(new Date()),
+                  getDate(new Date()) + 1
+                )
+              );
             }}
-            className={sx("quickSelect", {"active": globalDateWithoutTime === format(new Date(nowYear, getMonth(today), nowDay + 1), "yyyy-MM-dd")} )}
+            className={sx("quickSelect", {
+              active:
+                globalDateWithoutTime ===
+                format(
+                  new Date(
+                    getYear(new Date()),
+                    getMonth(new Date()),
+                    getDate(new Date()) + 1
+                  ),
+                  "yyyy-MM-dd"
+                ),
+            })}
           >
             tommorow
           </div>
