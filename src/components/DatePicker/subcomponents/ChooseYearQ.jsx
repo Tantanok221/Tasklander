@@ -1,7 +1,6 @@
 import React from 'react'
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import classNames from "classnames/bind";
-import { IconContext } from "react-icons";
 import style from "../style.module.scss";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import {getYear,getMonth,getDate} from "date-fns"
