@@ -14,24 +14,25 @@ const QuickSelector = ({
     typeof globalDate === typeof new Date()
       ? format(globalDate, "yyyy-MM-dd")
       : null;
-
+  const todayWithoutTime = new Date(
+    getYear(new Date()),
+    getMonth(new Date()),
+    getDate(new Date())
+  )
+  const tommorowWithoutTime = new Date(
+    getYear(new Date()),
+    getMonth(new Date()),
+    getDate(new Date()) + 1
+  )
   return (
     <div className={sx("row")}>
       <div
         onClick={() => {
           setGlobalDate(
-            new Date(
-              getYear(new Date()),
-              getMonth(new Date()),
-              getDate(new Date())
-            )
+            todayWithoutTime
           );
           setDate(
-            new Date(
-              getYear(new Date()),
-              getMonth(new Date()),
-              getDate(new Date())
-            )
+            todayWithoutTime
           );
           // To avoid having time signature when returning back to GlobalDate
         }}
@@ -39,11 +40,7 @@ const QuickSelector = ({
           active:
             globalDateWithoutTime ===
             format(
-              new Date(
-                getYear(new Date()),
-                getMonth(new Date()),
-                getDate(new Date())
-              ),
+              todayWithoutTime,
               "yyyy-MM-dd"
             ),
         })}
@@ -53,18 +50,10 @@ const QuickSelector = ({
       <div
         onClick={() => {
           setGlobalDate(
-            new Date(
-              getYear(new Date()),
-              getMonth(new Date()),
-              getDate(new Date()) + 1
-            )
+            tommorowWithoutTime
           );
           setDate(
-            new Date(
-              getYear(new Date()),
-              getMonth(new Date()),
-              getDate(new Date()) + 1
-            )
+            tommorowWithoutTime
           );
         }}
         className={sx(
@@ -72,11 +61,7 @@ const QuickSelector = ({
             active:
               globalDateWithoutTime ===
               format(
-                new Date(
-                  getYear(new Date()),
-                  getMonth(new Date()),
-                  getDate(new Date()) + 1
-                ),
+                tommorowWithoutTime,
                 "yyyy-MM-dd"
               ),
           },
