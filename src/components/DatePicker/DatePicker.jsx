@@ -19,6 +19,9 @@ import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import style from "./style.module.scss";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import classNames from 'classnames/bind';
+
+
 
 const DatePicker = ({ globalDate, setGlobalDate }) => {
   const [today, setDate] = React.useState(new Date());
@@ -78,6 +81,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   let ArrayOfQuater = ["Q1", "Q2", "Q3", "Q4"];
   let WeekRow = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
+  const sx = classNames.bind(style)
   return (
     <ToggleGroup.Root
       type="single"
@@ -88,7 +92,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
       }}
     >
       <IconContext.Provider value={{ color: "#686868", size: "1.5rem" }}>
-        <div className={`${style.row}`}>
+        <div className={sx("row")}>
           <FaAngleLeft
             className={style.icon}
             onClick={() => {
@@ -97,9 +101,9 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
               );
             }}
           />
-          <ToggleGroup.Item value={nowYear} className={style.button}>
+          <ToggleGroup.Item value={nowYear} className={sx("button")}>
             <div
-              className={`${style.highlight} ${style.clickable} ${style.text}`}
+              className={sx("highlight","clickable","text")}
             >
               {nowYear}
             </div>
@@ -109,10 +113,10 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
               <ToggleGroup.Item
                 key={index}
                 value={nowYear + " " + item}
-                className={style.button}
+                className={sx("button")}
               >
                 <div
-                  className={`${style.text} ${style.clickable} ${style.quater} `}
+                  className={sx("quater","text","clickable")}
                 >
                   {item}
                 </div>
@@ -120,7 +124,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
             );
           })}
           <FaAngleRight
-            className={style.icon}
+            className={sx("icon")}
             onClick={() => {
               setDate(
                 new Date(getYear(today) + 1, getMonth(today), getDate(today))
@@ -128,9 +132,9 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
             }}
           />
         </div>
-        <div className={`${style.row}`}>
+        <div className={sx("row")}>
           <FaAngleLeft
-            className={style.icon}
+            className={sx("icon")}
             onClick={() => {
               setDate(
                 new Date(getYear(today), getMonth(today) - 1, getDate(today))
@@ -139,10 +143,10 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
           />
           <ToggleGroup.Item
             value={nowYear + " " + nowFormatMonth}
-            className={`${style.button}`}
+            className={sx("button")}
           >
             <div
-              className={`${style.highlight} ${style.clickable} ${style.text} `}
+              className={sx("highlight","clickable","text")}
             >
               {nowFormatMonth}
             </div>
@@ -153,21 +157,21 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                 new Date(getYear(today), getMonth(today) + 1, getDate(today))
               );
             }}
-            className={style.icon}
+            className={sx("icon")}
           />
         </div>
-        <div className={`${style.row}`}>
-          <div className={style.week}>
-            <div className={`${style.text} ${style.gray}`}>WEEKS</div>
+        <div className={sx("row")}>
+          <div className={sx("week")}>
+            <div className={sx("text","gray")}>WEEKS</div>
             {ArrayWeek.map((item, index) => {
               return (
                 <ToggleGroup.Item
                   value={nowYear + " W" + item}
                   key={index}
-                  className={`${style.button} ${style.textContainer}`}
+                  className={sx("button","textContainer")}
                 >
                   <div
-                    className={`${style.nonHighlight} ${style.weekItem}  ${style.text}`}
+                    className={sx("nonHighlight","weekItem","text")}
                   >
                     {"W" + item}
                   </div>{" "}
@@ -175,12 +179,12 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
               );
             })}
           </div>
-          <div className={style.divider}></div>
-          <div className={style.day}>
-            <div className={style.dayRow}>
+          <div className={sx("divider")}></div>
+          <div className={sx("day")}>
+            <div className={sx("dayRow")}>
               {WeekRow.map((item, index) => {
                 return (
-                  <div key={index} className={`${style.text} ${style.gray}`}>
+                  <div key={index} className={sx("text","gray")}>
                     {item}
                   </div>
                 );
@@ -188,28 +192,28 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
             </div>
             {ArrayOfDay.map((array, index) => {
               return (
-                <div className={style.dayRow} key={"dayRow" + index}>
+                <div className={sx("dayRow")} key={"dayRow" + index}>
                   {array.map((item, i) => {
                     if (i === 6 || i === 5) {
                       return (
                         <ToggleGroup.Item
                           value={new Date(nowYear, getMonth(today), item)}
                           key={"date" + i}
-                          className={`${style.button} ${style.textContainer} ${style.red}`}
+                          className={sx("button","textContainer","red")}
                         >
-                          <div className={`${style.gray}`}>{item}</div>
+                          <div className={sx("gray")}>{item}</div>
                         </ToggleGroup.Item>
                       );
                     }
                     if (item === "")
-                      return <div className={style.textContainer}></div>;
+                      return <div className={sx("textContainer")}></div>;
                     return (
                       <ToggleGroup.Item
                         value={new Date(nowYear, getMonth(today), item)}
                         key={"date" + i}
-                        className={`${style.button} ${style.textContainer}`}
+                        className={sx("button","textContainer")}
                       >
-                        <div className={`${style.nonHighlight}`}>{item}</div>
+                        <div className={sx("nonHighlight")}>{item}</div>
                       </ToggleGroup.Item>
                     );
                   })}
@@ -218,24 +222,24 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
             })}
           </div>
         </div>
-        <div className={style.row}>
+        <div className={sx("row")}>
           <div
             onClick={() => {
               setGlobalDate(new Date());
             }}
-            className={`${style.quickSelect}`}
+            className={sx("quickSelect")}
           >
             today
           </div>
           <div onClick={() => {
               setGlobalDate(new Date(getYear(new Date()),getMonth(new Date()),getDate(new Date())+1));
-            }} className={`${style.quickSelect}`}>tommorow</div>
+            }} className={sx("quickSelect")}>tommorow</div>
           <div onClick={() => {
               setGlobalDate(getYear(new Date()) + " W" + nowWeek);
-            }} className={`${style.quickSelect}`}>this week</div>
+            }} className={sx("quickSelect")}>this week</div>
         </div>
-        <div className={style.row}>
-          <div className={style.removeDate} onClick={() => {
+        <div className={sx("row")}>
+          <div className={sx("removeDate")} onClick={() => {
               setGlobalDate("");
           }}>Remove Date</div>
         </div>
