@@ -183,3 +183,10 @@
   
   border-bottom: 2px solid $obvStroke;
 }
+
+.active {
+  background-color: $brandColor;
+  :hover {
+    background-color: $brandColor ;
+  }
+}
