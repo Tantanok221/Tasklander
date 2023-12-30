@@ -80,7 +80,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   let WeekRow = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
   const sx = classNames.bind(style);
-  console.log(ArrayOfDay);
+  // TODO: refactor 2nd and 3rd row to its own subcomponent
   return (
     <ToggleGroup.Root
       type="single"
