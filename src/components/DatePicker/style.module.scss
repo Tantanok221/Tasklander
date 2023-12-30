@@ -186,6 +186,12 @@
 
 .active {
   background-color: $brandColor;
+  .gray {
+    color: $white;
+  }
+  .nonHighlight {
+    color: $white;
+  }
   :hover {
     background-color: $brandColor ;
   }
