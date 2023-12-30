@@ -9,6 +9,7 @@ const QuickSelector = ({
   globalDate,
   nowYear,
 }) => {
+  // BUG: CSS style quickSelect:hover will override active:hover style
   const sx = classNames.bind(style);
   const globalDateWithoutTime =
     typeof globalDate === typeof new Date()
