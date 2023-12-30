@@ -87,7 +87,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   let WeekRow = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
   const sx = classNames.bind(style);
- 
+  console.log(ArrayOfDay);
   return (
     <ToggleGroup.Root
       type="single"
@@ -98,7 +98,12 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
       }}
     >
       <IconContext.Provider value={{ color: "#686868", size: "1.5rem" }}>
-        <ChooseYearQ globalDate={globalDate} nowYear={nowYear} setDate={setDate} today={today} />
+        <ChooseYearQ
+          globalDate={globalDate}
+          nowYear={nowYear}
+          setDate={setDate}
+          today={today}
+        />
         <div className={sx("row")}>
           <FaAngleLeft
             className={sx("icon")}
@@ -166,6 +171,13 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                   key={"dayRow " + nowFormatMonth + nowYear + index}
                 >
                   {array.map((item, i) => {
+                    if (item === "")
+                      return (
+                        <div
+                          key={"emptyContainer" + nowFormatMonth + nowYear + i}
+                          className={sx("textContainer")}
+                        ></div>
+                      );
                     if (i === 6 || i === 5) {
                       return (
                         <ToggleGroup.Item
@@ -184,13 +196,6 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                         </ToggleGroup.Item>
                       );
                     }
-                    if (item === "")
-                      return (
-                        <div
-                          key={"emptyContainer" + nowFormatMonth + nowYear + i}
-                          className={sx("textContainer")}
-                        ></div>
-                      );
                     return (
                       <ToggleGroup.Item
                         value={new Date(nowYear, getMonth(today), item)}
