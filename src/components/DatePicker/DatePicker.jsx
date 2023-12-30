@@ -23,6 +23,7 @@ import classNames from "classnames/bind";
 // Import Components
 import QuickSelector from "./subcomponents/QuickSelector.jsx";
 import RemoveDate from "./subcomponents/RemoveDate.jsx";
+import { ChooseYearQ } from "./subcomponents/ChooseYearQ.jsx";
 const DatePicker = ({ globalDate, setGlobalDate }) => {
   const [today, setDate] = React.useState(new Date());
   const nowDay = getDate(today);
@@ -31,7 +32,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   const nowWeekOfMonth = getWeekOfMonth(today);
   const nowFormatMonth = format(today, "MMMM");
   const nowYear = getYear(today);
-  const globalDateWithoutTime = globalDate
+  const globalDateWithoutTime = typeof(globalDate) === typeof(new Date())
     ? format(globalDate, "yyyy-MM-dd")
     : null;
   const AllOfThisYear = eachDayOfInterval({
@@ -81,7 +82,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   for (let i = 0; i < ArrayOfDay.length; i++) {
     ArrayWeek.push(nowWeekOfStartMonth + i);
   }
-  let ArrayOfQuater = ["Q1", "Q2", "Q3", "Q4"];
+  
   let WeekRow = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
   const sx = classNames.bind(style);
@@ -95,40 +96,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
       }}
     >
       <IconContext.Provider value={{ color: "#686868", size: "1.5rem" }}>
-        <div className={sx("row")}>
-          <FaAngleLeft
-            className={sx("icon")}
-            onClick={() => {
-              setDate(
-                new Date(getYear(today) - 1, getMonth(today), getDate(today))
-              );
-            }}
-          />
-          <ToggleGroup.Item value={nowYear} className={sx("button")}>
-            <div className={sx("highlight", "clickable", "text")}>
-              {nowYear}
-            </div>
-          </ToggleGroup.Item>
-          {ArrayOfQuater.map((item, index) => {
-            return (
-              <ToggleGroup.Item
-                key={index}
-                value={nowYear + " " + item}
-                className={sx("button")}
-              >
-                <div className={sx("quater", "text", "clickable")}>{item}</div>
-              </ToggleGroup.Item>
-            );
-          })}
-          <FaAngleRight
-            className={sx("icon")}
-            onClick={() => {
-              setDate(
-                new Date(getYear(today) + 1, getMonth(today), getDate(today))
-              );
-            }}
-          />
-        </div>
+        <ChooseYearQ nowYear={nowYear} setDate={setDate} today={today}/>
         <div className={sx("row")}>
           <FaAngleLeft
             className={sx("icon")}
@@ -243,7 +211,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
             })}
           </div>
         </div>
-        <QuickSelector nowWeek={nowWeek}globalDateWithoutTime={globalDateWithoutTime} setDate={setDate} setGlobalDate={setGlobalDate}/>
+        <QuickSelector nowWeek={nowWeek} globalDateWithoutTime={globalDateWithoutTime} setDate={setDate} setGlobalDate={setGlobalDate}/>
         <RemoveDate setGlobalDate={setGlobalDate}/>
       </IconContext.Provider >
     </ToggleGroup.Root>
