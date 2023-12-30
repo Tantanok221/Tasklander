@@ -3,16 +3,11 @@ import {
   getWeek,
   getDay,
   getYear,
-  getWeekOfMonth,
   startOfMonth,
   getDate,
   getMonth,
-  getQuarter,
   format,
   eachDayOfInterval,
-  getDaysInMonth,
-  eachWeekOfInterval,
-  getWeeksInMonth,
   getDayOfYear,
 } from "date-fns";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
@@ -29,7 +24,6 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   const nowDay = getDate(today);
   const nowWeek = getWeek(today, { weekStartsOn: 1 });
   const nowWeekOfStartMonth = getWeek(startOfMonth(today), { weekStartsOn: 1 }); // Unsure: Might cause bug, im not sure
-  const nowWeekOfMonth = getWeekOfMonth(today);
   const nowFormatMonth = format(today, "MMMM");
   const nowYear = getYear(today);
   const globalDateWithoutTime =
@@ -40,10 +34,9 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
     start: new Date(nowYear, 0, 1),
     end: new Date(nowYear, 11, 31),
   });
-  const weekInMonth = getWeeksInMonth(today);
   const todayIndex = getDayOfYear(today) - 1;
   const StartOfThisMonthIndex = todayIndex - nowDay + 1;
-  const totalDate = getDaysInMonth(today);
+
   // DayOfWeek originally 0 represent sunday, 1 represent monday so on and so forth
   let DayOfWeek = getDay(AllOfThisYear[todayIndex]);
   let DayOfWeekMonthStart = getDay(AllOfThisYear[StartOfThisMonthIndex]);
