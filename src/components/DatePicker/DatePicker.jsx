@@ -87,7 +87,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   let WeekRow = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
   const sx = classNames.bind(style);
-  console.log(today)
+ 
   return (
     <ToggleGroup.Root
       type="single"
