@@ -22,13 +22,13 @@
 .highlight {
   border-radius: 8px;
   color: $white;
-  font-weight: 600;
+  font-weight: 500;
 }
 .gray {
   font-size: 1rem;
   border-radius: 8px;
   color: $iconGray;
-  font-weight: 600;
+  font-weight: 500;
   
 }
 
@@ -186,11 +186,19 @@
 
 .active {
   background-color: $brandColor;
+  color: $white;
+  font-weight: 600;
   .gray {
     color: $white;
+    font-weight: 600;
   }
   .nonHighlight {
     color: $white;
+    font-weight: 600;
+  }
+  .text {
+    color: $white;
+    font-weight: 600;
   }
   :hover {
     background-color: $brandColor ;
