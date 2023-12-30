@@ -24,7 +24,6 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   const [today, setDate] = React.useState(new Date());
   const nowDay = getDate(today);
   const nowWeek = getWeek(today, { weekStartsOn: 1}); 
-
   const nowWeekOfStartMonth = getWeek(startOfMonth(today), { weekStartsOn: 1}); // Unsure: Might cause bug, im not sure
   const nowWeekOfMonth = getWeekOfMonth(today);
   const nowFormatMonth = format(today, "MMMM");
@@ -232,11 +231,13 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
               setGlobalDate(new Date(getYear(new Date()),getMonth(new Date()),getDate(new Date())+1));
             }} className={`${style.quickSelect}`}>tommorow</div>
           <div onClick={() => {
-              setGlobalDate(getYear(new Date()) + " W" + getWeek(new Date(),{ weekStartsOn: 1}));
+              setGlobalDate(getYear(new Date()) + " W" + nowWeek);
             }} className={`${style.quickSelect}`}>this week</div>
         </div>
         <div className={style.row}>
-          <div className={style.removeDate}>Remove Date</div>
+          <div className={style.removeDate} onClick={() => {
+              setGlobalDate("");
+          }}>Remove Date</div>
         </div>
       </IconContext.Provider>
     </ToggleGroup.Root>
