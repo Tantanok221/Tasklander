@@ -11,7 +11,7 @@ import {
   getDayOfYear,
 } from "date-fns";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
-import style from "./style.module.scss";
+import style from "./style.module.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import classNames from "classnames/bind";

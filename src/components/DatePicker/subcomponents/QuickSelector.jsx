@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames/bind";
-import style from "../style.module.scss";
+import style from "../style.module.css";
 import { format, getYear, getDate, getMonth, getWeek } from "date-fns";
 const QuickSelector = ({
   nowWeek,

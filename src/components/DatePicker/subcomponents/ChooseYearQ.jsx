@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import classNames from "classnames/bind";
-import style from "../style.module.scss";
+import style from "../style.module.css";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import {getYear,getMonth,getDate} from "date-fns"
 export const ChooseYearQ = ({globalDate,nowYear,setDate,today}) => {
