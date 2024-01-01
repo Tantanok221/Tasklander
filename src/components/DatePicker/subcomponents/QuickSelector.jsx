@@ -2,14 +2,8 @@ import React from "react";
 import classNames from "classnames/bind";
 import style from "../style.module.css";
 import { format, getYear, getDate, getMonth, getWeek } from "date-fns";
-const QuickSelector = ({
-  nowWeek,
-  setDate,
-  setGlobalDate,
-  globalDate,
-  
-}) => {
-  // ! BUG: CSS style quickSelect:hover will override active:hover style
+import { motion } from "framer-motion";
+const QuickSelector = ({ nowWeek, setDate, setGlobalDate, globalDate }) => {
   const sx = classNames.bind(style);
   const globalDateWithoutTime =
     typeof globalDate === typeof new Date()
@@ -19,73 +13,73 @@ const QuickSelector = ({
     getYear(new Date()),
     getMonth(new Date()),
     getDate(new Date())
-  )
+  );
   const tommorowWithoutTime = new Date(
     getYear(new Date()),
     getMonth(new Date()),
     getDate(new Date()) + 1
-  )
+  );
   return (
     <div className={sx("row")}>
-      <div
-        onClick={() => {
-          setGlobalDate(
-            todayWithoutTime
-          );
-          setDate(
-            todayWithoutTime
-          );
-          // To avoid having time signature when returning back to GlobalDate
-        }}
-        className={sx("quickSelect", {
-          active:
-            globalDateWithoutTime ===
-            format(
-              todayWithoutTime,
-              "yyyy-MM-dd"
-            ),
-        })}
+      <motion.div
+        className={sx("buttonBorderRadius")}
+        whileHover={{ backgroundColor: "var(--onHold)" }}
       >
-        today
-      </div>
-      <div
-        onClick={() => {
-          setGlobalDate(
-            tommorowWithoutTime
-          );
-          setDate(
-            tommorowWithoutTime
-          );
-        }}
-        className={sx(
-          {
+        <div
+          onClick={() => {
+            setGlobalDate(todayWithoutTime);
+            setDate(todayWithoutTime);
+            // To avoid having time signature when returning back to GlobalDate
+          }}
+          className={sx("quickSelect", {
             active:
-              globalDateWithoutTime ===
-              format(
-                tommorowWithoutTime,
-                "yyyy-MM-dd"
-              ),
-          },
-          "quickSelect"
-        )}
+              globalDateWithoutTime === format(todayWithoutTime, "yyyy-MM-dd"),
+          })}
+        >
+          today
+        </div>
+      </motion.div>
+      <motion.div
+        className={sx("buttonBorderRadius")}
+        whileHover={{ backgroundColor: "var(--onHold)" }}
       >
-        tommorow
-      </div>
-      <div
-        onClick={() => {
-          setGlobalDate(
-            getYear(new Date()) +
-              " W" +
-              getWeek(new Date(), { weekStartsOn: 1 })
-          );
-          setDate(new Date()); // To go back to today at the UI, will cause data desynced between GlobalDate and today
-        }}
-        className={sx("quickSelect", {
-          active: globalDate === getYear(new Date()) + " W" + nowWeek,
-        })}
+        <div
+          onClick={() => {
+            setGlobalDate(tommorowWithoutTime);
+            setDate(tommorowWithoutTime);
+          }}
+          className={sx(
+            {
+              active:
+                globalDateWithoutTime ===
+                format(tommorowWithoutTime, "yyyy-MM-dd"),
+            },
+            "quickSelect"
+          )}
+        >
+          tommorow
+        </div>
+      </motion.div>
+      <motion.div
+        className={sx("buttonBorderRadius")}
+        whileHover={{ backgroundColor: "var(--onHold)" }}
       >
-        this week
-      </div>
+        <div
+          onClick={() => {
+            setGlobalDate(
+              getYear(new Date()) +
+                " W" +
+                getWeek(new Date(), { weekStartsOn: 1 })
+            );
+            setDate(new Date()); // To go back to today at the UI, will cause data desynced between GlobalDate and today
+          }}
+          className={sx("quickSelect", {
+            active: globalDate === getYear(new Date()) + " W" + nowWeek,
+          })}
+        >
+          this week
+        </div>
+      </motion.div>
     </div>
   );
 };
