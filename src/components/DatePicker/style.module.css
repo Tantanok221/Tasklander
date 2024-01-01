@@ -8,6 +8,14 @@
   font-size: 1rem;
   border-radius: 8px;
 }
+
+.weekText {
+  color: var(--iconGray-onHold);
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
 .quater {
   color: var(--iconGray-onHold);
   font-weight: 600;
@@ -31,13 +39,13 @@
 .icon {
   border-radius: 8px;
   padding: 4px 4px;
+  align-self: center;
+  justify-self: center;
 }
-.icon:hover {
-  background-color: var(--onHold);
+.iconAdjustment{
+  display: flex
 }
-.icon:active {
-  background-color: var(--onClick);
-}
+
 .body {
   background-color: var(--background);
   border-radius: 0.5rem;
@@ -49,11 +57,9 @@
   border-radius: 8px;
   padding: 0px;
 }
-.button :hover {
-  background-color: var(--onHold);
-}
-.button :active {
-  background-color: var(--onClick);
+
+.buttonBorderRadius {
+  border-radius: 8px;
 }
 .week {
   display: flex;
@@ -106,12 +112,7 @@
   padding: 0.5rem 1.5rem;
   border-radius: 12px;
 }
-.quickSelect:hover {
-  background-color: var(--onHold);
-}
-.quickSelect:active {
-  background-color: var(--onClick);
-}
+
 .removeDate {
   color: var(--iconGray-onHold);
   font-size: 1rem;
@@ -120,13 +121,10 @@
   width: 100%;
   border-radius: 8px;
   padding-left: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
-.removeDate:hover {
-  background-color: var(--onHold);
-}
-.removeDate:active {
-  background-color: var(--onClick);
-}
+
 .row:nth-child(1) {
   gap: 1.5rem;
   align-items: center;
@@ -163,6 +161,4 @@
   color: var(--white);
   font-weight: 600;
 }
-.active :hover {
-  background-color: var(--brandColor);
-}
+
