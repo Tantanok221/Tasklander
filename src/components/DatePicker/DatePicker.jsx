@@ -10,18 +10,21 @@ import {
   eachDayOfInterval,
   getDayOfYear,
 } from "date-fns";
-import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import "./variable.css";
 import style from "./style.module.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import classNames from "classnames/bind";
+import * as ToggleGroup from "@radix-ui/react-toggle-group";
+//Import Animation
+import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
+import { animateContainer, animateItem } from "./helper/animate.js";
 // Import Components
 import QuickSelector from "./subcomponents/QuickSelector.jsx";
 import RemoveDate from "./subcomponents/RemoveDate.jsx";
 import { ChooseYearQ } from "./subcomponents/ChooseYearQ.jsx";
 import { ToggleItem } from "./subcomponents/ToggleItem.jsx";
-import { motion } from "framer-motion";
+
 const DatePicker = ({ globalDate, setGlobalDate }) => {
   const [today, setDate] = React.useState(new Date());
   const nowDay = getDate(today);
@@ -85,178 +88,224 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   const sx = classNames.bind(style);
   // TODO: refactor 2nd and 3rd row to its own subcomponent
   return (
-    <ToggleGroup.Root
-      type="single"
-      value={today}
-      className={style.body}
-      onValueChange={(value) => {
-        setGlobalDate(value);
-      }}
-    >
-      <IconContext.Provider value={{ color: "#686868", size: "1.5rem" }}>
-        <ChooseYearQ
-          globalDate={globalDate}
-          nowYear={nowYear}
-          setDate={setDate}
-          today={today}
-        />
-        <div className={sx("row")}>
-          <motion.div
-            className={sx("iconAdjustment", "buttonBorderRadius")}
-            whileHover={{ backgroundColor: "var(--onHold)" }}
-          >
-            <FaAngleLeft
-              className={sx("icon")}
-              onClick={() => {
-                setDate(
-                  new Date(getYear(today), getMonth(today) - 1, getDate(today))
-                );
-              }}
-            />
-          </motion.div>
-          <ToggleItem
-            setting={{
-              className: sx("buttonBorderRadius"),
-              whileHover: { backgroundColor: "var(--onHold)" },
-            }}
-            value={nowYear + " " + nowFormatMonth}
-            className={sx("button", {
-              active: globalDate === nowYear + " " + nowFormatMonth,
-            })}
-          >
-            <div className={sx("highlight", "clickable", "text")}>
-              {nowFormatMonth}
-            </div>
-          </ToggleItem>
-          <motion.div
-            className={sx("iconAdjustment", "buttonBorderRadius")}
-            whileHover={{ backgroundColor: "var(--onHold)" }}
-          >
-            <FaAngleRight
-              onClick={() => {
-                setDate(
-                  new Date(getYear(today), getMonth(today) + 1, getDate(today))
-                );
-              }}
-              className={sx("icon")}
-            />
-          </motion.div>
-        </div>
-        <div className={sx("row")}>
-          <div className={sx("week")}>
-            <div className={sx("text", "gray")}>WEEKS</div>
-            {ArrayWeek.map((item, index) => {
-              return (
-                <ToggleItem
-                  setting={{
-                    className: sx("buttonBorderRadius"),
-                    whileHover: { backgroundColor: "var(--onHold)" },
+    <AnimatePresence>
+      <motion.div
+        variants={animateContainer}
+        initial="hidden"
+        animate="show"
+        exit="exit"
+      >
+        <ToggleGroup.Root
+          type="single"
+          value={today}
+          className={style.body}
+          onValueChange={(value) => {
+            setGlobalDate(value);
+          }}
+        >
+          <IconContext.Provider value={{ color: "#686868", size: "1.5rem" }}>
+            <motion.div variants={animateItem}>
+              <ChooseYearQ
+                globalDate={globalDate}
+                nowYear={nowYear}
+                setDate={setDate}
+                today={today}
+              />
+            </motion.div>
+            <motion.div variants={animateItem} className={sx("row")}>
+              <motion.div
+                className={sx("iconAdjustment", "buttonBorderRadius")}
+                whileHover={{ backgroundColor: "var(--onHold)" }}
+              >
+                <FaAngleLeft
+                  className={sx("icon")}
+                  onClick={() => {
+                    setDate(
+                      new Date(
+                        getYear(today),
+                        getMonth(today) - 1,
+                        getDate(today)
+                      )
+                    );
                   }}
-                  value={nowYear + " W" + item}
-                  key={index}
-                  className={sx("button", "textContainer","weekRowAdjustment")}
-                >
-                  <div
-                    className={sx("nonHighlight", "weekItem", "text", {
-                      active: globalDate === nowYear + " W" + item,
-                    })}
-                  >
-                    {"W" + item}
-                  </div>{" "}
-                </ToggleItem>
-              );
-            })}
-          </div>
-          <div className={sx("divider")}></div>
-          <div className={sx("day")}>
-            <div className={sx("dayRow")}>
-              {WeekRow.map((item, index) => {
-                return (
-                  <div key={index} className={sx("text", "gray")}>
-                    {item}
-                  </div>
-                );
-              })}
-            </div>
-            {ArrayOfDay.map((array, index) => {
-              return (
-                <div
-                  className={sx("dayRow")}
-                  key={"dayRow " + nowFormatMonth + nowYear + index}
-                >
-                  {array.map((item, i) => {
-                    if (item === "")
-                      return (
-                        <div
-                          key={"emptyContainer" + nowFormatMonth + nowYear + i}
-                          className={sx("textContainer")}
-                        ></div>
-                      );
-                    if (i === 6 || i === 5) {
-                      return (
-                        <ToggleItem
-                          setting={{
-                            className: sx("buttonBorderRadius"),
-                            whileHover: { backgroundColor: "var(--onHold)" },
-                          }}
-                          value={new Date(nowYear, getMonth(today), item)}
-                          key={"date " + nowDay + nowFormatMonth + nowYear + i}
-                          className={sx("button", "textContainer", "red", {
-                            active:
-                              globalDateWithoutTime ===
-                              format(
-                                new Date(nowYear, getMonth(today), item),
-                                "yyyy-MM-dd"
-                              ),
-                          })}
-                        >
-                          <div className={sx("gray")}>{item}</div>
-                        </ToggleItem>
-                      );
-                    }
-                    return (
-                      <ToggleItem
-                        setting={{
-                          className: sx("buttonBorderRadius"),
-                          whileHover: { backgroundColor: "var(--onHold)" },
-                        }}
-                        value={new Date(nowYear, getMonth(today), item)}
-                        key={
-                          "dateNonHighlight " +
-                          nowDay +
-                          nowFormatMonth +
-                          nowYear +
-                          i
-                        }
-                        className={sx("button", "textContainer", {
-                          active:
-                            globalDateWithoutTime ===
-                            format(
-                              new Date(nowYear, getMonth(today), item),
-                              "yyyy-MM-dd"
-                            ),
+                />
+              </motion.div>
+              <ToggleItem
+                setting={{
+                  className: sx("buttonBorderRadius"),
+                  whileHover: { backgroundColor: "var(--onHold)" },
+                }}
+                value={nowYear + " " + nowFormatMonth}
+                className={sx("button", {
+                  active: globalDate === nowYear + " " + nowFormatMonth,
+                })}
+              >
+                <div className={sx("highlight", "clickable", "text")}>
+                  {nowFormatMonth}
+                </div>
+              </ToggleItem>
+              <motion.div
+                className={sx("iconAdjustment", "buttonBorderRadius")}
+                whileHover={{ backgroundColor: "var(--onHold)" }}
+              >
+                <FaAngleRight
+                  onClick={() => {
+                    setDate(
+                      new Date(
+                        getYear(today),
+                        getMonth(today) + 1,
+                        getDate(today)
+                      )
+                    );
+                  }}
+                  className={sx("icon")}
+                />
+              </motion.div>
+            </motion.div>
+            <motion.div variants={animateItem} className={sx("row")}>
+              <motion.div
+                variants={animateItem}
+                // initial="hidden"
+                // animate="show"
+                className={sx("week")}
+              >
+                <motion.div className={sx("text", "gray")}>WEEKS</motion.div>
+                {ArrayWeek.map((item, index) => {
+                  return (
+                    <ToggleItem
+                      setting={{
+                        variants: animateItem,
+                        className: sx("buttonBorderRadius"),
+                        whileHover: { backgroundColor: "var(--onHold)" },
+                      }}
+                      value={nowYear + " W" + item}
+                      key={index}
+                      className={sx(
+                        "button",
+                        "textContainer",
+                        "weekRowAdjustment"
+                      )}
+                    >
+                      <div
+                        className={sx("nonHighlight", "weekItem", "text", {
+                          active: globalDate === nowYear + " W" + item,
                         })}
                       >
-                        <div className={sx("nonHighlight")}>{item}</div>
-                      </ToggleItem>
+                        {"W" + item}
+                      </div>{" "}
+                    </ToggleItem>
+                  );
+                })}
+              </motion.div>
+              <div className={sx("divider")}></div>
+              <motion.div
+                // initial="hidden"
+                // animate="show"
+                className={sx("day")}
+              >
+                <motion.div variants={animateItem} className={sx("dayRow")}>
+                  {WeekRow.map((item, index) => {
+                    return (
+                      <div key={index} className={sx("text", "gray")}>
+                        {item}
+                      </div>
                     );
                   })}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <QuickSelector
-          nowWeek={nowWeek}
-          globalDateWithoutTime={globalDateWithoutTime}
-          nowYear={nowYear}
-          setDate={setDate}
-          setGlobalDate={setGlobalDate}
-          globalDate={globalDate}
-        />
-        <RemoveDate setGlobalDate={setGlobalDate} />
-      </IconContext.Provider>
-    </ToggleGroup.Root>
+                </motion.div>
+                {ArrayOfDay.map((array, index) => {
+                  return (
+                    <motion.div
+                      variants={animateItem}
+                      className={sx("dayRow")}
+                      key={"dayRow " + nowFormatMonth + nowYear + index}
+                    >
+                      {array.map((item, i) => {
+                        if (item === "")
+                          return (
+                            <div
+                              key={
+                                "emptyContainer" + nowFormatMonth + nowYear + i
+                              }
+                              className={sx("textContainer")}
+                            ></div>
+                          );
+                        if (i === 6 || i === 5) {
+                          return (
+                            <ToggleItem
+                              setting={{
+                                className: sx("buttonBorderRadius"),
+                                whileHover: {
+                                  backgroundColor: "var(--onHold)",
+                                },
+                              }}
+                              value={new Date(nowYear, getMonth(today), item)}
+                              key={
+                                "date " + nowDay + nowFormatMonth + nowYear + i
+                              }
+                              className={sx("button", "textContainer", "red", {
+                                active:
+                                  globalDateWithoutTime ===
+                                  format(
+                                    new Date(nowYear, getMonth(today), item),
+                                    "yyyy-MM-dd"
+                                  ),
+                              })}
+                            >
+                              <div className={sx("gray")}>{item}</div>
+                            </ToggleItem>
+                          );
+                        }
+                        return (
+                          <ToggleItem
+                            setting={{
+                              className: sx("buttonBorderRadius"),
+                              whileHover: {
+                                backgroundColor: "var(--onHold)",
+                              },
+                            }}
+                            value={new Date(nowYear, getMonth(today), item)}
+                            key={
+                              "dateNonHighlight " +
+                              nowDay +
+                              nowFormatMonth +
+                              nowYear +
+                              i
+                            }
+                            className={sx("button", "textContainer", {
+                              active:
+                                globalDateWithoutTime ===
+                                format(
+                                  new Date(nowYear, getMonth(today), item),
+                                  "yyyy-MM-dd"
+                                ),
+                            })}
+                          >
+                            <div className={sx("nonHighlight")}>{item}</div>
+                          </ToggleItem>
+                        );
+                      })}
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            </motion.div>
+            <motion.div variants={animateItem}>
+              <QuickSelector
+                nowWeek={nowWeek}
+                globalDateWithoutTime={globalDateWithoutTime}
+                nowYear={nowYear}
+                setDate={setDate}
+                setGlobalDate={setGlobalDate}
+                globalDate={globalDate}
+              />
+            </motion.div>
+            <motion.div variants={animateItem}>
+              <RemoveDate setGlobalDate={setGlobalDate} />
+            </motion.div>
+          </IconContext.Provider>
+        </ToggleGroup.Root>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export const ToggleItem = ({ children,setting, ...props }) => {
   return (
-    <motion.div {... setting}>
+    <motion.div {... setting} >
       <ToggleGroup.Item {...props}>{children}</ToggleGroup.Item>
     </motion.div>
   );
