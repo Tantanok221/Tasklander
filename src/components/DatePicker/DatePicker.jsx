@@ -11,7 +11,7 @@ import {
   getDayOfYear,
 } from "date-fns";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
-import "./variable.css"
+import "./variable.css";
 import style from "./style.module.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IconContext } from "react-icons";
@@ -20,6 +20,8 @@ import classNames from "classnames/bind";
 import QuickSelector from "./subcomponents/QuickSelector.jsx";
 import RemoveDate from "./subcomponents/RemoveDate.jsx";
 import { ChooseYearQ } from "./subcomponents/ChooseYearQ.jsx";
+import { ToggleItem } from "./subcomponents/ToggleItem.jsx";
+import { motion } from "framer-motion";
 const DatePicker = ({ globalDate, setGlobalDate }) => {
   const [today, setDate] = React.useState(new Date());
   const nowDay = getDate(today);
@@ -99,15 +101,24 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
           today={today}
         />
         <div className={sx("row")}>
-          <FaAngleLeft
-            className={sx("icon")}
-            onClick={() => {
-              setDate(
-                new Date(getYear(today), getMonth(today) - 1, getDate(today))
-              );
+          <motion.div
+            className={sx("iconAdjustment", "buttonBorderRadius")}
+            whileHover={{ backgroundColor: "var(--onHold)" }}
+          >
+            <FaAngleLeft
+              className={sx("icon")}
+              onClick={() => {
+                setDate(
+                  new Date(getYear(today), getMonth(today) - 1, getDate(today))
+                );
+              }}
+            />
+          </motion.div>
+          <ToggleItem
+            setting={{
+              className: sx("buttonBorderRadius"),
+              whileHover: { backgroundColor: "var(--onHold)" },
             }}
-          />
-          <ToggleGroup.Item
             value={nowYear + " " + nowFormatMonth}
             className={sx("button", {
               active: globalDate === nowYear + " " + nowFormatMonth,
@@ -116,25 +127,34 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
             <div className={sx("highlight", "clickable", "text")}>
               {nowFormatMonth}
             </div>
-          </ToggleGroup.Item>
-          <FaAngleRight
-            onClick={() => {
-              setDate(
-                new Date(getYear(today), getMonth(today) + 1, getDate(today))
-              );
-            }}
-            className={sx("icon")}
-          />
+          </ToggleItem>
+          <motion.div
+            className={sx("iconAdjustment", "buttonBorderRadius")}
+            whileHover={{ backgroundColor: "var(--onHold)" }}
+          >
+            <FaAngleRight
+              onClick={() => {
+                setDate(
+                  new Date(getYear(today), getMonth(today) + 1, getDate(today))
+                );
+              }}
+              className={sx("icon")}
+            />
+          </motion.div>
         </div>
         <div className={sx("row")}>
           <div className={sx("week")}>
             <div className={sx("text", "gray")}>WEEKS</div>
             {ArrayWeek.map((item, index) => {
               return (
-                <ToggleGroup.Item
+                <ToggleItem
+                  setting={{
+                    className: sx("buttonBorderRadius"),
+                    whileHover: { backgroundColor: "var(--onHold)" },
+                  }}
                   value={nowYear + " W" + item}
                   key={index}
-                  className={sx("button", "textContainer", )}
+                  className={sx("button", "textContainer")}
                 >
                   <div
                     className={sx("nonHighlight", "weekItem", "text", {
@@ -143,7 +163,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                   >
                     {"W" + item}
                   </div>{" "}
-                </ToggleGroup.Item>
+                </ToggleItem>
               );
             })}
           </div>
@@ -174,7 +194,11 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                       );
                     if (i === 6 || i === 5) {
                       return (
-                        <ToggleGroup.Item
+                        <ToggleItem
+                          setting={{
+                            className: sx("buttonBorderRadius"),
+                            whileHover: { backgroundColor: "var(--onHold)" },
+                          }}
                           value={new Date(nowYear, getMonth(today), item)}
                           key={"date " + nowDay + nowFormatMonth + nowYear + i}
                           className={sx("button", "textContainer", "red", {
@@ -187,11 +211,15 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                           })}
                         >
                           <div className={sx("gray")}>{item}</div>
-                        </ToggleGroup.Item>
+                        </ToggleItem>
                       );
                     }
                     return (
-                      <ToggleGroup.Item
+                      <ToggleItem
+                        setting={{
+                          className: sx("buttonBorderRadius"),
+                          whileHover: { backgroundColor: "var(--onHold)" },
+                        }}
                         value={new Date(nowYear, getMonth(today), item)}
                         key={
                           "dateNonHighlight " +
@@ -210,7 +238,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                         })}
                       >
                         <div className={sx("nonHighlight")}>{item}</div>
-                      </ToggleGroup.Item>
+                      </ToggleItem>
                     );
                   })}
                 </div>
