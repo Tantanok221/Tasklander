@@ -87,6 +87,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
 
   const sx = classNames.bind(style);
   // TODO: refactor 2nd and 3rd row to its own subcomponent
+  // TODO: Make sure that the animation between week and day container is in sync
   return (
     <AnimatePresence>
       <motion.div
@@ -178,7 +179,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                     <ToggleItem
                       setting={{
                         variants: animateItem,
-                        className: sx("buttonBorderRadius"),
+                        className: sx("buttonBorderRadius","weekButtonAdjustment"),
                         whileHover: { backgroundColor: "var(--onHold)" },
                       }}
                       value={nowYear + " W" + item}
@@ -186,7 +187,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                       className={sx(
                         "button",
                         "textContainer",
-                        "weekRowAdjustment"
+                        
                       )}
                     >
                       <motion.div

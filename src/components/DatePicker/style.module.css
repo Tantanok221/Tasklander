@@ -62,10 +62,12 @@
   border-radius: 8px;
 }
 
-.weekRowAdjustment {
-  width: 28px;
-  height: 25px;
+.weekButtonAdjustment {
+  width: 44px;
+  height: 33px;
 }
+
+
 .week {
   display: flex;
   flex-direction: column;
@@ -121,6 +123,10 @@
   border-radius: 12px;
 }
 
+.quickSelectFix{
+  justify-content: space-between;
+}
+
 .removeDate {
   color: var(--iconGray-onHold);
   font-size: 1rem;
@@ -147,6 +153,7 @@
 .row:nth-child(4) {
   justify-content: space-between;
 }
+
 .row {
   padding: 1.5rem 2rem;
   display: flex;
