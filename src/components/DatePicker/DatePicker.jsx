@@ -182,7 +182,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                         whileHover: { backgroundColor: "var(--onHold)" },
                       }}
                       value={nowYear + " W" + item}
-                      key={index}
+                      key={"W"+item+" "+index}
                       className={sx(
                         "button",
                         "textContainer",
@@ -190,13 +190,14 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                       )}
                     >
                       <motion.div
-                      
+                        initial={{opacity: 0}}
+                        animate={{opacity: 1}}
                         className={sx("nonHighlight", "weekItem", "text", {
                           active: globalDate === nowYear + " W" + item,
                         })}
                       >
                         {"W" + item}
-                      </motion.div>{" "}
+                      </motion.div>
                     </ToggleItem>
                   );
                 })}
