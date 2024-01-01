@@ -11,6 +11,7 @@ import {
   getDayOfYear,
 } from "date-fns";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import "./variable.css"
 import style from "./style.module.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IconContext } from "react-icons";
@@ -133,7 +134,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                 <ToggleGroup.Item
                   value={nowYear + " W" + item}
                   key={index}
-                  className={sx("button", "textContainer")}
+                  className={sx("button", "textContainer", )}
                 >
                   <div
                     className={sx("nonHighlight", "weekItem", "text", {
