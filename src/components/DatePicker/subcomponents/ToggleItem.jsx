@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export const ToggleItem = ({ children,setting, ...props }) => {
   return (
-    <motion.div {... setting} >
+    <motion.div {... setting} whileTap={{scale: 0.8}}>
       <ToggleGroup.Item {...props}>{children}</ToggleGroup.Item>
     </motion.div>
   );

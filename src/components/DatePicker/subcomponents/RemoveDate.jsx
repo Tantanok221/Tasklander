@@ -14,6 +14,7 @@ const RemoveDate = ({setGlobalDate}) => {
           setGlobalDate("");
         }}
         whileHover={{ backgroundColor: "var(--onHold)" }}
+        whileTap={{scale: 0.8}}
       >
         Remove Date
       </motion.div>

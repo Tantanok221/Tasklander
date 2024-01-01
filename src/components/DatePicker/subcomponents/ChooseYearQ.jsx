@@ -14,6 +14,7 @@ export const ChooseYearQ = ({ globalDate, nowYear, setDate, today }) => {
       <motion.div
         className={sx("iconAdjustment", "buttonBorderRadius")}
         whileHover={{ backgroundColor: "var(--onHold)" }}
+        whileTap={{scale: 0.8}}
       >
         <FaAngleLeft
           className={sx("icon")}
@@ -56,6 +57,7 @@ export const ChooseYearQ = ({ globalDate, nowYear, setDate, today }) => {
       <motion.div
         className={sx("iconAdjustment", "buttonBorderRadius")}
         whileHover={{ backgroundColor: "var(--onHold)" }}
+        whileTap={{scale: 0.8}}
       >
         <FaAngleRight
           className={sx("icon")}

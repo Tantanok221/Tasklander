@@ -116,8 +116,10 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
               <motion.div
                 className={sx("iconAdjustment", "buttonBorderRadius")}
                 whileHover={{ backgroundColor: "var(--onHold)" }}
+                whileTap={{scale: 0.8}}
               >
                 <FaAngleLeft
+                
                   className={sx("icon")}
                   onClick={() => {
                     setDate(
@@ -145,6 +147,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                 </div>
               </ToggleItem>
               <motion.div
+              whileTap={{scale: 0.8}}
                 className={sx("iconAdjustment", "buttonBorderRadius")}
                 whileHover={{ backgroundColor: "var(--onHold)" }}
               >
@@ -186,13 +189,14 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                         "weekRowAdjustment"
                       )}
                     >
-                      <div
+                      <motion.div
+                      
                         className={sx("nonHighlight", "weekItem", "text", {
                           active: globalDate === nowYear + " W" + item,
                         })}
                       >
                         {"W" + item}
-                      </div>{" "}
+                      </motion.div>{" "}
                     </ToggleItem>
                   );
                 })}

@@ -20,12 +20,13 @@ const QuickSelector = ({ nowWeek, setDate, setGlobalDate, globalDate }) => {
     getDate(new Date()) + 1
   );
   return (
-    <div className={sx("row")}>
+    <div className={sx("row", "quickSelectFix")}>
       <motion.div
         className={sx("buttonBorderRadius")}
         whileHover={{ backgroundColor: "var(--onHold)" }}
       >
-        <div
+        <motion.div
+          whileTap={{ scale: 0.8 }}
           onClick={() => {
             setGlobalDate(todayWithoutTime);
             setDate(todayWithoutTime);
@@ -37,13 +38,14 @@ const QuickSelector = ({ nowWeek, setDate, setGlobalDate, globalDate }) => {
           })}
         >
           today
-        </div>
+        </motion.div>
       </motion.div>
       <motion.div
         className={sx("buttonBorderRadius")}
         whileHover={{ backgroundColor: "var(--onHold)" }}
       >
-        <div
+        <motion.div
+          whileTap={{ scale: 0.8 }}
           onClick={() => {
             setGlobalDate(tommorowWithoutTime);
             setDate(tommorowWithoutTime);
@@ -58,13 +60,14 @@ const QuickSelector = ({ nowWeek, setDate, setGlobalDate, globalDate }) => {
           )}
         >
           tommorow
-        </div>
+        </motion.div>
       </motion.div>
       <motion.div
         className={sx("buttonBorderRadius")}
         whileHover={{ backgroundColor: "var(--onHold)" }}
       >
-        <div
+        <motion.div
+          whileTap={{ scale: 0.8 }}
           onClick={() => {
             setGlobalDate(
               getYear(new Date()) +
@@ -78,7 +81,7 @@ const QuickSelector = ({ nowWeek, setDate, setGlobalDate, globalDate }) => {
           })}
         >
           this week
-        </div>
+        </motion.div>
       </motion.div>
     </div>
   );
