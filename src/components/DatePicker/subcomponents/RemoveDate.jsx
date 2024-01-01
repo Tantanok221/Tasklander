@@ -1,19 +1,22 @@
 import React from "react";
 import style from "../style.module.css";
 import classNames from "classnames/bind";
+import { motion } from "framer-motion";
 
 const RemoveDate = ({setGlobalDate}) => {
   const sx = classNames.bind(style);
   return (
     <div className={sx("row")}>
-      <div
+      <motion.div
+        
         className={sx("removeDate")}
         onClick={() => {
           setGlobalDate("");
         }}
+        whileHover={{ backgroundColor: "var(--onHold)" }}
       >
         Remove Date
-      </div>
+      </motion.div>
     </div>
   );
 };
