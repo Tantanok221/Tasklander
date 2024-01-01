@@ -61,16 +61,24 @@
 .buttonBorderRadius {
   border-radius: 8px;
 }
+
+.weekRowAdjustment {
+  width: 28px;
+  height: 25px;
+}
 .week {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
 }
 .weekItem {
-  display: inline-block;
+  width: 28px;
+  height: 25px;
   padding: 4px 8px;
   border-radius: 8px;
   font-weight: 600;
+  
 }
 .divider {
   width: 2px;

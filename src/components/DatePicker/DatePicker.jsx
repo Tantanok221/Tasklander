@@ -154,7 +154,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                   }}
                   value={nowYear + " W" + item}
                   key={index}
-                  className={sx("button", "textContainer")}
+                  className={sx("button", "textContainer","weekRowAdjustment")}
                 >
                   <div
                     className={sx("nonHighlight", "weekItem", "text", {
