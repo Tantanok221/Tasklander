@@ -9,6 +9,7 @@ import {
   format,
   eachDayOfInterval,
   getDayOfYear,
+  getDaysInMonth
 } from "date-fns";
 import "./variable.css";
 import style from "./style.module.css";
@@ -57,7 +58,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   let counter = 0;
   let ArrayOfDay = [[], [], [], [], [], []];
   // Create a 2D array to store all the date of the month
-  while (iterate < 31 + DayOfWeekMonthStart - 1) {
+  while (iterate < getDaysInMonth(today) + DayOfWeekMonthStart - 1) {
     if (iterate < DayOfWeekMonthStart - 1) {
       ArrayOfDay[0].push("");
       iterate++;
@@ -84,7 +85,6 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
   }
 
   let WeekRow = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-
   const sx = classNames.bind(style);
   // TODO: refactor 2nd and 3rd row to its own subcomponent
   // TODO: Make sure that the animation between week and day container is in sync
@@ -117,10 +117,9 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
               <motion.div
                 className={sx("iconAdjustment", "buttonBorderRadius")}
                 whileHover={{ backgroundColor: "var(--onHold)" }}
-                whileTap={{scale: 0.8}}
+                whileTap={{ scale: 0.8 }}
               >
                 <FaAngleLeft
-                
                   className={sx("icon")}
                   onClick={() => {
                     setDate(
@@ -148,7 +147,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                 </div>
               </ToggleItem>
               <motion.div
-              whileTap={{scale: 0.8}}
+                whileTap={{ scale: 0.8 }}
                 className={sx("iconAdjustment", "buttonBorderRadius")}
                 whileHover={{ backgroundColor: "var(--onHold)" }}
               >
@@ -179,20 +178,17 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                     <ToggleItem
                       setting={{
                         variants: animateItem,
-                        className: sx("buttonBorderRadius","weekButtonAdjustment"),
+                        className: sx(
+                          "buttonBorderRadius",
+                          "weekButtonAdjustment"
+                        ),
                         whileHover: { backgroundColor: "var(--onHold)" },
                       }}
                       value={nowYear + " W" + item}
-                      key={"W"+item+" "+index}
-                      className={sx(
-                        "button",
-                        "textContainer",
-                        
-                      )}
+                      key={"W" + item + " " + index}
+                      className={sx("button", "textContainer")}
                     >
                       <motion.div
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
                         className={sx("nonHighlight", "weekItem", "text", {
                           active: globalDate === nowYear + " W" + item,
                         })}
