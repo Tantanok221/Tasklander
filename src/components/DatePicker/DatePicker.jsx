@@ -25,6 +25,7 @@ import QuickSelector from "./subcomponents/QuickSelector.jsx";
 import RemoveDate from "./subcomponents/RemoveDate.jsx";
 import { ChooseYearQ } from "./subcomponents/ChooseYearQ.jsx";
 import { ToggleItem } from "./subcomponents/ToggleItem.jsx";
+import { MonthSelector } from "./subcomponents/MonthSelector.jsx"
 
 const DatePicker = ({ globalDate, setGlobalDate }) => {
   const [today, setDate] = React.useState(new Date());
@@ -113,58 +114,7 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
                 today={today}
               />
             </motion.div>
-            <motion.div variants={animateItem} className={sx("row")}>
-              <motion.div
-                className={sx("iconAdjustment", "buttonBorderRadius")}
-                whileHover={{ backgroundColor: "var(--onHold)" }}
-                whileTap={{ scale: 0.8 }}
-              >
-                <FaAngleLeft
-                  className={sx("icon")}
-                  onClick={() => {
-                    setDate(
-                      new Date(
-                        getYear(today),
-                        getMonth(today) - 1,
-                        getDate(today)
-                      )
-                    );
-                  }}
-                />
-              </motion.div>
-              <ToggleItem
-                setting={{
-                  className: sx("buttonBorderRadius"),
-                  whileHover: { backgroundColor: "var(--onHold)" },
-                }}
-                value={nowYear + " " + nowFormatMonth}
-                className={sx("button", {
-                  active: globalDate === nowYear + " " + nowFormatMonth,
-                })}
-              >
-                <div className={sx("highlight", "clickable", "text")}>
-                  {nowFormatMonth}
-                </div>
-              </ToggleItem>
-              <motion.div
-                whileTap={{ scale: 0.8 }}
-                className={sx("iconAdjustment", "buttonBorderRadius")}
-                whileHover={{ backgroundColor: "var(--onHold)" }}
-              >
-                <FaAngleRight
-                  onClick={() => {
-                    setDate(
-                      new Date(
-                        getYear(today),
-                        getMonth(today) + 1,
-                        getDate(today)
-                      )
-                    );
-                  }}
-                  className={sx("icon")}
-                />
-              </motion.div>
-            </motion.div>
+            <MonthSelector nowYear={nowYear} today={today} nowFormatMonth={nowFormatMonth} globalDate={globalDate} setDate={setDate}/>
             <motion.div variants={animateItem} className={sx("row")}>
               <motion.div
                 variants={animateItem}
