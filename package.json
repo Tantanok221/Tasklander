@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-form": "^0.0.3",
     "@radix-ui/react-toggle-group": "^1.0.4",
     "@supabase/supabase-js": "^2.39.2",
     "classnames": "^2.5.1",
