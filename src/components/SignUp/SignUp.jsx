@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { supabase } from "../../helper/supabase.js";
 import { FcGoogle } from "react-icons/fc";
 import * as Form from "@radix-ui/react-form";
-
+import { IconContext } from "react-icons";
 async function signUpNewUser(email, password) {
   const { data, error } = await supabase.auth.signUp({
     email: email,
@@ -22,37 +22,41 @@ const SignUp = () => {
     <div className={sx("container")}>
       <div className={sx("header")}>
         <h1 className={sx("title")}>Sign Up</h1>
-        <span className={sx("subtitle")}></span>
+        <span className={sx("subtitle")}>Sign Up To Your Account</span>
       </div>
       <div className={sx("googleButton")}>
-        <FcGoogle />
+        <IconContext.Provider value={{ size: "2rem" }}>
+          <FcGoogle />
+        </IconContext.Provider>
+
         <h2 className={sx("googleText")}>Sign Up With Google</h2>
       </div>
-      <div className={sx("divider")}></div>
+      <div className={sx("divider")}>
+        <div className={sx("line")}></div>
+        <span className={sx("or")}>OR</span>
+        <div className={sx("line")}></div>
+      </div>
       <Form.Root className={sx("formContainer")}>
-        <Form.Field>
-          <Form.Label>Email</Form.Label>
-          <Form.Message className="FormMessage" match="valueMissing">
-            Please enter your email
-          </Form.Message>
-          <Form.Message className="FormMessage" match="typeMismatch">
+        <Form.Field className={sx("formField")}>
+          <Form.Label className={sx("formLabel")}>Email</Form.Label>
+          <Form.Control asChild>
+            <input placeholder="Enter Your Email" className={sx("input")} type="email" required />
+          </Form.Control>
+          <Form.Message className={sx("formMessage")} match="typeMismatch">
             Please provide a valid email
           </Form.Message>
-          <Form.Control asChild>
-            <input className="Input" type="email" required />
-          </Form.Control>
         </Form.Field>
-        <Form.Field>
-          <Form.Label>Password</Form.Label>
-          <Form.Message className="FormMessage" match="valueMissing">
-            Please enter your Password
-          </Form.Message>
-          <Form.Message className="FormMessage" match="typeMismatch">
-            Please provide a valid email
-          </Form.Message>
+        <Form.Field className={sx("formField")}>
+          <Form.Label className={sx("formLabel")}>Password</Form.Label>
           <Form.Control asChild>
-            <input minlength="6"  className="Input" type="password" required />
+            <input placeholder="Enter Your Password"  minlength="6" className={sx("input")} type="password" required />
           </Form.Control>
+          <Form.Message className={sx("formMessage")} match="tooShort">
+          The password must be longer than 6 character
+          </Form.Message>
+          <Form.Message className={sx("formMessage")} match="typeMismatch">
+            Please provide a valid password
+          </Form.Message>
         </Form.Field>
       </Form.Root>
     </div>
