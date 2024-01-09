@@ -16,7 +16,7 @@
   --completed-task: #1C1C1D;
   --completed-text: #7C7C7C;
   --completed-timeDisplay: #2A2A2A;
-  --font: "Poppins";
+  --font: Poppins;
 }
 
 body {
