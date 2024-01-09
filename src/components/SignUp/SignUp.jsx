@@ -17,10 +17,10 @@ async function signUpNewUser(email, password) {
 }
 const SignUp = () => {
   const [password, setPassword] = React.useState("");
-  const [email, setEmail] = React.useState([]);
-  const [error, setError] = React.useState([]);
-  const [emailError, setEmailError] = React.useState(false);
-  const [passwordError, setPasswordError] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [error, setError] = React.useState("");
+  const [emailError, setEmailError] = React.useState([]);
+  const [passwordError, setPasswordError] = React.useState([]);
 
   const sx = classNames.bind(style);
   console.log(error);
@@ -54,14 +54,18 @@ const SignUp = () => {
               required
             />
           </Form.Control>
-          <Form.Message
-            className={sx("formMessage", {
-              errorText: emailError[1]?.reasons == "invalid",
-            })}
-            match="typeMismatch"
-          >
-            Please provide a valid email
-          </Form.Message>
+          {!isEmail(email) ? (
+            <div
+              className={sx("formMessage", {
+                errorText: emailError[1]?.reasons == "invalid",
+              })}
+              match="typeMismatch"
+            >
+              Please provide a valid email
+            </div>
+          ) : (
+            <></>
+          )}
         </Form.Field>
         <Form.Field className={sx("formField")}>
           <Form.Label className={sx("formLabel")}>Password</Form.Label>
@@ -76,14 +80,18 @@ const SignUp = () => {
               required
             />
           </Form.Control>
-          <Form.Message
-            className={sx("formMessage", {
-              errorText: passwordError[1]?.reasons == "length",
-            })}
-            match="tooShort"
-          >
-            The password must be longer than 6 character
-          </Form.Message>
+          {password.length < 6 ? (
+            <div
+              className={sx("formMessage", {
+                errorText: passwordError[1]?.reasons == "length",
+              })}
+              match="tooShort"
+            >
+              The password must be longer than 6 character
+            </div>
+          ) : (
+            <></>
+          )}
         </Form.Field>
         <Form.Submit asChild>
           <button
