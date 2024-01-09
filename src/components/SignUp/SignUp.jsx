@@ -2,7 +2,7 @@ import React from "react";
 import style from "./style.module.css";
 import classNames from "classnames/bind";
 import { motion } from "framer-motion";
-import { supabase } from "../..helper/supabase.js";
+import { supabase } from "../../helper/supabase.js";
 import { FcGoogle } from "react-icons/fc";
 import * as Form from "@radix-ui/react-form";
 

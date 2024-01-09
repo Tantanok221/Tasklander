@@ -88,7 +88,6 @@ const DatePicker = ({ globalDate, setGlobalDate }) => {
 
   
   const sx = classNames.bind(style);
-  // TODO: refactor 2nd and 3rd row to its own subcomponent
   // TODO: Make sure that the animation between week and day container is in sync
   return (
     <AnimatePresence>
