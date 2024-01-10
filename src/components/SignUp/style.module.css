@@ -106,8 +106,6 @@
   color: var(--iconGray, #686868);
 }
 
-
-
 .formMessage {
   color: var(--gray, #848586);
   font-family: var(--font);
@@ -117,11 +115,11 @@
 
 .formButton {
   font-size: 1.5rem;
-  color: var(--white, #fff);  
+  color: var(--white, #fff);
   font-family: var(--font);
   font-weight: 600;
   padding: 1.5rem 6rem;
-  background: var(--task, #1F1F21);
+  background: var(--task, #1f1f21);
   border: 2px solid var(--Dark-ObvStroke, #494949);
   border-radius: 0.75rem;
 }
@@ -133,5 +131,31 @@
   outline: none;
 }
 .errorText {
-  color: #ff0000
+  color: #ff0000;
+}
+
+.checkboxContainer {
+  display: flex;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  align-items: center;
+}
+
+.checkbox {
+  width: 1.425rem;
+  aspect-ratio: 1/1;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkboxLabel {
+  color: var(--white, #fff);
+  font-family: var(--font);
+  font-size: 1.125rem;
+
+  font-weight: 500;
 }
