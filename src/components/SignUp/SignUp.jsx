@@ -3,13 +3,13 @@ import style from "./style.module.css";
 import classNames from "classnames/bind";
 import { motion } from "framer-motion";
 import { supabase } from "../../helper/supabase.js";
-import { FcGoogle } from "react-icons/fc";
 import * as Form from "@radix-ui/react-form";
 import { IconContext } from "react-icons";
 import isEmail from "validator/lib/isEmail";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { FaCheck } from "react-icons/fa6";
-
+import { FormDivider } from "../FormDivider/FormDivider.jsx";
+import { GoogleButton } from "./subcomponent/GoogleButton.jsx";
 async function signUpNewUser(email, password) {
   const message = await supabase.auth.signUp({
     email: email,
@@ -18,12 +18,7 @@ async function signUpNewUser(email, password) {
   return message;
 }
 
-async function signInWithGoogle() {
-  const message = await supabase.auth.signInWithOAuth({
-    provider: "google",
-  });
-  return message;
-}
+
 
 const SignUp = () => {
   const [password, setPassword] = React.useState("");
@@ -40,23 +35,8 @@ const SignUp = () => {
         <h1 className={sx("title")}>Sign Up</h1>
         <span className={sx("subtitle")}>Sign Up To Your Account</span>
       </div>
-      <button
-        onClick={() => {
-          let message = signInWithGoogle();
-        }}
-        className={sx("googleButton")}
-      >
-        <IconContext.Provider value={{ size: "2rem" }}>
-          <FcGoogle />
-        </IconContext.Provider>
-
-        <h2 className={sx("googleText")}>Sign Up With Google</h2>
-      </button>
-      <div className={sx("divider")}>
-        <div className={sx("line")}></div>
-        <span className={sx("or")}>OR</span>
-        <div className={sx("line")}></div>
-      </div>
+      <GoogleButton/>
+      <FormDivider/>
       <Form.Root
         onSubmit={(event) => {
           event.preventDefault();

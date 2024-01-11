@@ -1,0 +1,20 @@
+.divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.or {
+  width: 10%;
+  text-align: center;
+  color: var(--Dark-Gray, #848586);
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.line {
+  background-color: var(--gray, #848586);
+  height: 1px;
+  width: 45%;
+}
