@@ -18,6 +18,13 @@ async function signUpNewUser(email, password) {
   return message;
 }
 
+async function signInWithGoogle() {
+  const message = await supabase.auth.signInWithOAuth({
+    provider: "google",
+  });
+  return message;
+}
+
 const SignUp = () => {
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -33,13 +40,18 @@ const SignUp = () => {
         <h1 className={sx("title")}>Sign Up</h1>
         <span className={sx("subtitle")}>Sign Up To Your Account</span>
       </div>
-      <div className={sx("googleButton")}>
+      <button
+        onClick={() => {
+          let message = signInWithGoogle();
+        }}
+        className={sx("googleButton")}
+      >
         <IconContext.Provider value={{ size: "2rem" }}>
           <FcGoogle />
         </IconContext.Provider>
 
         <h2 className={sx("googleText")}>Sign Up With Google</h2>
-      </div>
+      </button>
       <div className={sx("divider")}>
         <div className={sx("line")}></div>
         <span className={sx("or")}>OR</span>
@@ -111,14 +123,19 @@ const SignUp = () => {
             <></>
           )}
         </Form.Field>
-        <Checkbox.Root onCheckedChange={() => {
-          setVisible(!visible)
-        }} className={sx("checkboxContainer")}>
+        <Checkbox.Root
+          onCheckedChange={() => {
+            setVisible(!visible);
+          }}
+          className={sx("checkboxContainer")}
+        >
           <div className={sx("checkbox")}>
             <Checkbox.Indicator>
-            <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
-              <FaCheck />
-            </IconContext.Provider>
+              <IconContext.Provider
+                value={{ style: { verticalAlign: "middle" } }}
+              >
+                <FaCheck />
+              </IconContext.Provider>
             </Checkbox.Indicator>
           </div>
           <label className={sx("checkboxLabel")}>Show Password</label>
