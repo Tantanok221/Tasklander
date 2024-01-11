@@ -9,6 +9,7 @@ import { IconContext } from "react-icons";
 import isEmail from "validator/lib/isEmail";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { FaCheck } from "react-icons/fa6";
+import { FormDivider } from "../FormDivider/FormDivider.jsx";
 
 
 async function signInWithEmail(email, password) {
@@ -51,11 +52,7 @@ const Login = () => {
 
         <h2 className={sx("googleText")}>Sign In With Google</h2>
       </button>
-      <div className={sx("divider")}>
-        <div className={sx("line")}></div>
-        <span className={sx("or")}>OR</span>
-        <div className={sx("line")}></div>
-      </div>
+      <FormDivider/>
       <Form.Root
         onSubmit={(event) => {
           event.preventDefault();
