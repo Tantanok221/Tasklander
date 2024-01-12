@@ -16,3 +16,9 @@ export async function signUpNewUser(email, password) {
   });
   return message;
 }
+
+
+export const getSession = async () => {
+  const data = await supabase.auth.getSession()
+  return data
+}
