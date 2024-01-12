@@ -23,7 +23,7 @@ export const PasswordForm = () => {
               id="password"
               onChange={(value) => updatePassword(value.currentTarget.value)}
               minLength="6"
-              className={sx("input", { errorBorder: passwordError[0] || error.message === "Invalid login credentials" })}
+              className={sx("input", { errorBorder: passwordError[0] || error?.message === "Invalid login credentials" })}
               type={visible ? "text" : "password"}
               required
             />
@@ -40,7 +40,7 @@ export const PasswordForm = () => {
           ) : (
             <></>
           )}
-          {error.message === "Invalid login credentials" ? (
+          {error?.message === "Invalid login credentials" ? (
             <div
               className={sx("formMessage", {
                 errorText: emailError[1]?.reasons == "invalid" || error?.name,

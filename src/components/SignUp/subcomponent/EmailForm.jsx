@@ -21,7 +21,7 @@ export const EmailForm = () => {
           placeholder="Enter Your Email"
           onChange={(value) => updateEmail(value.currentTarget.value)}
           className={sx("input", {
-            errorBorder: emailError[0] || error.name,
+            errorBorder: emailError[0] || error?.name,
           })}
           type="email"
           required
@@ -37,7 +37,7 @@ export const EmailForm = () => {
           Please provide a valid email
         </div>
       ) : null}
-      {error.message === "User already registered" ? (
+      {error?.message === "User already registered" ? (
         <div
           className={sx("formMessage", {
             errorText: emailError[1]?.reasons == "invalid" || error?.name,
