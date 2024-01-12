@@ -8,3 +8,11 @@ export async function signInWithEmail(email, password) {
   });
   return message;
 }
+
+export async function signUpNewUser(email, password) {
+  const message = await supabase.auth.signUp({
+    email: email,
+    password: password,
+  });
+  return message;
+}
