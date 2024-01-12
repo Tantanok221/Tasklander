@@ -4,12 +4,12 @@ import classNames from "classnames/bind";
 import { motion } from "framer-motion";
 import { supabase } from "../../helper/supabase.js";
 import * as Form from "@radix-ui/react-form";
-import { IconContext } from "react-icons";
 import isEmail from "validator/lib/isEmail";
-import * as Checkbox from "@radix-ui/react-checkbox";
-import { FaCheck } from "react-icons/fa6";
 import { FormDivider } from "../FormDivider/FormDivider.jsx";
 import { GoogleButton } from "./subcomponent/GoogleButton.jsx";
+import { EmailForm } from "./subcomponent/EmailForm.jsx";
+import { PasswordForm } from "./subcomponent/PasswordForm.jsx";
+import { FormCheckbox } from "../FormCheckbox/FormCheckbox.jsx";
 async function signUpNewUser(email, password) {
   const message = await supabase.auth.signUp({
     email: email,
@@ -17,8 +17,6 @@ async function signUpNewUser(email, password) {
   });
   return message;
 }
-
-
 
 const SignUp = () => {
   const [password, setPassword] = React.useState("");
@@ -35,91 +33,27 @@ const SignUp = () => {
         <h1 className={sx("title")}>Sign Up</h1>
         <span className={sx("subtitle")}>Sign Up To Your Account</span>
       </div>
-      <GoogleButton/>
-      <FormDivider/>
+      <GoogleButton />
+      <FormDivider />
       <Form.Root
         onSubmit={(event) => {
           event.preventDefault();
         }}
         className={sx("formContainer")}
       >
-        <Form.Field className={sx("formField")}>
-          <Form.Label className={sx("formLabel")}>Email</Form.Label>
-          <Form.Control asChild>
-            <input
-              placeholder="Enter Your Email"
-              onChange={(value) => setEmail(value.currentTarget.value)}
-              className={sx("input", {
-                errorBorder: emailError[0] || error.name,
-              })}
-              type="email"
-              required
-            />
-          </Form.Control>
-          {!isEmail(email) ? (
-            <div
-              className={sx("formMessage", {
-                errorText: emailError[1]?.reasons == "invalid",
-              })}
-              match="typeMismatch"
-            >
-              Please provide a valid email
-            </div>
-          ) : null}
-          {error.message === "User already registered" ? (
-            <div
-              className={sx("formMessage", {
-                errorText: emailError[1]?.reasons == "invalid" || error?.name,
-              })}
-              match="typeMismatch"
-            >
-              User Already Registerd
-            </div>
-          ) : null}
-        </Form.Field>
-        <Form.Field className={sx("formField")}>
-          <Form.Label className={sx("formLabel")}>Password</Form.Label>
-          <Form.Control asChild>
-            <input
-              placeholder="Enter Your Password"
-              id="password"
-              onChange={(value) => setPassword(value.currentTarget.value)}
-              minLength="6"
-              className={sx("input", { errorBorder: passwordError[0] })}
-              type={visible ? "text" : "password"}
-              required
-            />
-          </Form.Control>
-          {password.length < 6 ? (
-            <div
-              className={sx("formMessage", {
-                errorText: passwordError[1]?.reasons == "length",
-              })}
-              match="tooShort"
-            >
-              The password must be longer than 6 character
-            </div>
-          ) : (
-            <></>
-          )}
-        </Form.Field>
-        <Checkbox.Root
-          onCheckedChange={() => {
-            setVisible(!visible);
-          }}
-          className={sx("checkboxContainer")}
-        >
-          <div className={sx("checkbox")}>
-            <Checkbox.Indicator>
-              <IconContext.Provider
-                value={{ style: { verticalAlign: "middle" } }}
-              >
-                <FaCheck />
-              </IconContext.Provider>
-            </Checkbox.Indicator>
-          </div>
-          <label className={sx("checkboxLabel")}>Show Password</label>
-        </Checkbox.Root>
+        <EmailForm
+          email={email}
+          setEmail={setEmail}
+          emailError={emailError}
+          error={error}
+        />
+        <PasswordForm
+          password={password}
+          setPassword={setPassword}
+          passwordError={passwordError}
+          visible={visible}
+        />
+        <FormCheckbox setVisible={setVisible}/>
         <Form.Submit asChild>
           <button
             onClick={() => {
