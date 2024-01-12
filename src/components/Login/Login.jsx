@@ -10,7 +10,8 @@ import { EmailForm } from "./subcomponent/EmailForm.jsx";
 import { PasswordForm } from "./subcomponent/PasswordForm.jsx";
 import { useForm } from "./hooks/useForm.js";
 import { Header } from "./subcomponent/Header.jsx";
-import { SubmitButton } from "./subcomponent/SubmitButton.jsx";
+import { FormSubmitButton } from "../FormSubmitButton/FormSubmitButton";
+import { signInWithEmail } from "../../helper/supabase.js";
 
 
 
@@ -34,7 +35,8 @@ const Login = () => {
         <EmailForm />
         <PasswordForm />
         <FormCheckbox flipVisible={flipVisible} />
-        <SubmitButton/>
+        <FormSubmitButton useForm={useForm} Function={signInWithEmail} text={"Sign Up"} />
+
       </Form.Root>
     </div>
   );

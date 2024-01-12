@@ -1,11 +1,9 @@
 import React from "react";
 import * as Form from "@radix-ui/react-form";
-import { useForm } from "../hooks/useForm.js";
-import { signUpNewUser } from "../../../helper/supabase.js";
-import style from "../style.module.css";
+import style from "./style.module.css";
 import isEmail from "validator/lib/isEmail";
 import classNames from "classnames/bind";
-export const SubmitButton = () => {
+export const FormSubmitButton = ({useForm,text,Function}) => {
   const updatePasswordError = useForm((state) => state.updatePasswordError);
   const updateEmailError = useForm((state) => state.updateEmailError);
   const updateError = useForm((state) => state.updateError);
@@ -26,7 +24,7 @@ export const SubmitButton = () => {
           }
           if (isEmail(email) && password.length > 6) {
             setTimeout(async () => {
-              let message = await signUpNewUser(email, password);
+              let message = await Function(email, password);
               console.log(message);
               updateError(message.error);
             }, 0);
@@ -34,7 +32,7 @@ export const SubmitButton = () => {
         }}
         className={sx("formButton")}
       >
-        Sign Up
+        {text}
       </button>
     </Form.Submit>
   );

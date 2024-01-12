@@ -10,9 +10,9 @@ import { EmailForm } from "./subcomponent/EmailForm.jsx";
 import { PasswordForm } from "./subcomponent/PasswordForm.jsx";
 import { FormCheckbox } from "../FormCheckbox/FormCheckbox.jsx";
 import { useForm } from "./hooks/useForm.js";
-import { SubmitButton } from "./subcomponent/SubmitButton.jsx";
+import { FormSubmitButton } from "../FormSubmitButton/FormSubmitButton";
 import { Header } from "./subcomponent/Header.jsx";
-
+import { signUpNewUser } from "../../helper/supabase.js";
 const SignUp = () => {
   const flipVisible = useForm((state) => state.flipVisible);
   const sx = classNames.bind(style);
@@ -30,7 +30,7 @@ const SignUp = () => {
         <EmailForm />
         <PasswordForm />
         <FormCheckbox flipVisible={flipVisible} />
-        <SubmitButton />
+        <FormSubmitButton useForm={useForm} Function={signUpNewUser} text={"Sign Up"} />
       </Form.Root>
     </div>
   );
