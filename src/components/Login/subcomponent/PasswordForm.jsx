@@ -1,7 +1,7 @@
 import React from 'react'
 import * as Form from "@radix-ui/react-form";
 import style from "../../../styles/Form.module.css";
-import { useForm } from "../hooks/useForm.js";
+import { useForm } from "../../../hooks/useForm.js";
 import classNames from "classnames/bind";
 import { motion } from "framer-motion";
 

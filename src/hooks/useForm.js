@@ -32,4 +32,5 @@ export const useForm = create((set) => ({
 
   visible: false,
   flipVisible: () => set((state) => ({ visible: !state.visible })),
+  reset: () => set((state) => ({visible: false,emailError: "",passwordError: "",error: "",password: "",email: "",}))
 }));

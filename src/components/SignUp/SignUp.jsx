@@ -9,7 +9,7 @@ import { GoogleButton } from "./subcomponent/GoogleButton.jsx";
 import { EmailForm } from "./subcomponent/EmailForm.jsx";
 import { PasswordForm } from "./subcomponent/PasswordForm.jsx";
 import { FormCheckbox } from "../FormCheckbox/FormCheckbox.jsx";
-import { useForm } from "./hooks/useForm.js";
+import { useForm } from "../../hooks/useForm.js";
 import { FormSubmitButton } from "../FormSubmitButton/FormSubmitButton";
 import { Header } from "./subcomponent/Header.jsx";
 import { signUpNewUser } from "../../helper/supabase.js";

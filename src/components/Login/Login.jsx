@@ -8,7 +8,7 @@ import { FormCheckbox } from "../FormCheckbox/FormCheckbox.jsx";
 import { GoogleButton } from "../SignUp/subcomponent/GoogleButton.jsx";
 import { EmailForm } from "./subcomponent/EmailForm.jsx";
 import { PasswordForm } from "./subcomponent/PasswordForm.jsx";
-import { useForm } from "./hooks/useForm.js";
+import { useForm } from "../../hooks/useForm.js";
 import { Header } from "./subcomponent/Header.jsx";
 import { FormSubmitButton } from "../FormSubmitButton/FormSubmitButton";
 import { signInWithEmail } from "../../helper/supabase.js";
@@ -35,7 +35,7 @@ const Login = () => {
         <EmailForm />
         <PasswordForm />
         <FormCheckbox flipVisible={flipVisible} />
-        <FormSubmitButton useForm={useForm} Function={signInWithEmail} text={"Sign Up"} />
+        <FormSubmitButton useForm={useForm} Function={signInWithEmail} text={"Log In"} />
       </Form.Root>
         <FormFooter/>
     </div>
