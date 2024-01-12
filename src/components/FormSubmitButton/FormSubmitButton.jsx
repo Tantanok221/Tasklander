@@ -1,4 +1,5 @@
 import React from "react";
+import {motion} from "framer-motion";
 import * as Form from "@radix-ui/react-form";
 import style from "./style.module.css";
 import isEmail from "validator/lib/isEmail";
@@ -13,7 +14,8 @@ export const FormSubmitButton = ({useForm,text,Function}) => {
 
   return (
     <Form.Submit asChild>
-      <button
+      <motion.button
+        whileTap={{ scale: 0.9 }}
         onClick={() => {
           updateError("");
           if (!isEmail(email)) {
@@ -33,7 +35,7 @@ export const FormSubmitButton = ({useForm,text,Function}) => {
         className={sx("formButton")}
       >
         {text}
-      </button>
+      </motion.button>
     </Form.Submit>
   );
 };
