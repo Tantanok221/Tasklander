@@ -3,6 +3,7 @@ import * as Form from "@radix-ui/react-form";
 import style from "../../../styles/Form.module.css";
 import classNames from "classnames/bind";
 import { useForm } from "../hooks/useForm.js";
+import { motion } from "framer-motion";
 
 export const PasswordForm = () => {
   const sx = classNames.bind(style);
@@ -14,7 +15,8 @@ export const PasswordForm = () => {
     <Form.Field className={sx("formField")}>
           <Form.Label className={sx("formLabel")}>Password</Form.Label>
           <Form.Control asChild>
-            <input
+            <motion.input
+              whileTap={{ scale: 0.995 }}
               placeholder="Enter Your Password"
               id="password"
               onChange={(value) => updatePassword(value.currentTarget.value)}
