@@ -24,7 +24,6 @@ import { animateContainer, animateItem } from "./helper/animate.js";
 import QuickSelector from "./subcomponents/QuickSelector.jsx";
 import RemoveDate from "./subcomponents/RemoveDate.jsx";
 import { ChooseYearQ } from "./subcomponents/ChooseYearQ.jsx";
-import { ToggleItem } from "./subcomponents/ToggleItem.jsx";
 import { MonthSelector } from "./subcomponents/MonthSelector.jsx"
 import { WeekDaySelector } from "./subcomponents/WeekDaySelector.jsx";
 
