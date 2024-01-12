@@ -17,6 +17,7 @@ export const SubmitButton = () => {
     <Form.Submit asChild>
           <button
             onClick={() => {
+              updateError("");
               if (!isEmail(email)) {
                 updateEmailError([true, { reasons: "invalid" }]);
                 
