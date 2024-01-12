@@ -16,7 +16,13 @@ export async function signUpNewUser(email, password) {
   });
   return message;
 }
-
+export async function signInWithGoogle() {
+  console.log(supabase)
+  const message = await supabase.auth.signInWithOAuth({
+    provider: 'google'
+  })
+  return message;
+}
 
 export const getSession = async () => {
   const data = await supabase.auth.getSession()
