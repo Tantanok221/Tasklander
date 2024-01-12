@@ -17,7 +17,8 @@ import { FormFooter } from "./subcomponent/FormFooter.jsx";
 
 
 const Login = () => {
-  
+  const reset = useForm((state) => state.reset);
+  reset()
   const flipVisible = useForm((state) => state.flipVisible);
   const sx = classNames.bind(style);
   return (
@@ -34,8 +35,8 @@ const Login = () => {
       >
         <EmailForm />
         <PasswordForm />
-        <FormCheckbox flipVisible={flipVisible} />
-        <FormSubmitButton useForm={useForm} Function={signInWithEmail} text={"Log In"} />
+        <FormCheckbox  />
+        <FormSubmitButton  Function={signInWithEmail} text={"Log In"} />
       </Form.Root>
         <FormFooter/>
     </div>

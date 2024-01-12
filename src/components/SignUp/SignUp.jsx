@@ -15,7 +15,9 @@ import { Header } from "./subcomponent/Header.jsx";
 import { signUpNewUser } from "../../helper/supabase.js";
 import { FormFooter } from "./subcomponent/FormFooter.jsx";
 const SignUp = () => {
-  const flipVisible = useForm((state) => state.flipVisible);
+  const reset = useForm((state) => state.reset);
+  reset()
+  
   const sx = classNames.bind(style);
   return (
     <div className={sx("container")}>
@@ -30,8 +32,8 @@ const SignUp = () => {
       >
         <EmailForm />
         <PasswordForm />
-        <FormCheckbox flipVisible={flipVisible} />
-        <FormSubmitButton useForm={useForm} Function={signUpNewUser} text={"Sign Up"} />
+        <FormCheckbox  />
+        <FormSubmitButton  Function={signUpNewUser} text={"Sign Up"} />
         <FormFooter/>
       </Form.Root>
     </div>
