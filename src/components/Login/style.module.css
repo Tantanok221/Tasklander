@@ -114,8 +114,6 @@
   font-weight: 500;
 }
 
-
-
 .errorBorder {
   border: 2px solid #ff0000;
 }
@@ -126,3 +124,23 @@
   color: #ff0000;
 }
 
+.FooterContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.FooterText {
+  color: var(--gray, #848586);
+  font-family: var(--font);
+  font-size: 1.5rem;
+  font-weight: 500;
+
+  
+}
+
+.FooterHighlight {
+  color: var(--white, #FFFFFF);
+  font-family: var(--font);
+  font-size: 1.5rem;
+  font-weight: 700;
+}

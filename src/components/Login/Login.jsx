@@ -12,13 +12,13 @@ import { useForm } from "./hooks/useForm.js";
 import { Header } from "./subcomponent/Header.jsx";
 import { FormSubmitButton } from "../FormSubmitButton/FormSubmitButton";
 import { signInWithEmail } from "../../helper/supabase.js";
+import { FormFooter } from "./subcomponent/FormFooter.jsx";
 
 
 
 const Login = () => {
   
   const flipVisible = useForm((state) => state.flipVisible);
-  
   const sx = classNames.bind(style);
   return (
     <div className={sx("container")}>
@@ -36,7 +36,7 @@ const Login = () => {
         <PasswordForm />
         <FormCheckbox flipVisible={flipVisible} />
         <FormSubmitButton useForm={useForm} Function={signInWithEmail} text={"Sign Up"} />
-
+        <FormFooter/>
       </Form.Root>
     </div>
   );
