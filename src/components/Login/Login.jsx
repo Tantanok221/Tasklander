@@ -10,71 +10,56 @@ import { FormCheckbox } from "../FormCheckbox/FormCheckbox.jsx";
 import { GoogleButton } from "../SignUp/subcomponent/GoogleButton.jsx";
 import { EmailForm } from "./subcomponent/EmailForm.jsx";
 import { PasswordForm } from "./subcomponent/PasswordForm.jsx";
-
+import { useForm } from "./hooks/useForm.js";
+import { Header } from "./subcomponent/Header.jsx";
 
 async function signInWithEmail(email, password) {
   const message = await supabase.auth.signInWithPassword({
     email: email,
     password: password,
   });
-  return message
+  return message;
 }
 
 const Login = () => {
-  const [password, setPassword] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [error, setError] = React.useState("");
-  const [emailError, setEmailError] = React.useState([]);
-  const [passwordError, setPasswordError] = React.useState([]);
-  const [visible, setVisible] = React.useState(false);
-  console.log(error.message);
+  const updatePasswordError = useForm((state) => state.updatePasswordError);
+  const updateEmailError = useForm((state) => state.updateEmailError);
+  const updateError = useForm((state) => state.updateError);
+  const flipVisible = useForm((state) => state.flipVisible);
+  const password = useForm((state) => state.password);
+  const email = useForm((state) => state.email);
   const sx = classNames.bind(style);
   return (
     <div className={sx("container")}>
-      <div className={sx("header")}>
-        <h1 className={sx("title")}>Login</h1>
-        <span className={sx("subtitle")}>Login To Your Account</span>
-      </div>
-      <GoogleButton/>
-      <FormDivider/>
-      
+      <Header />
+      <GoogleButton />
+      <FormDivider />
+
       <Form.Root
         onSubmit={(event) => {
           event.preventDefault();
         }}
         className={sx("formContainer")}
       >
-        <EmailForm
-          email={email}
-          setEmail={setEmail}
-          emailError={emailError}
-          error={error}
-        />
-        <PasswordForm
-          password={password}
-          setPassword={setPassword}
-          passwordError={passwordError}
-          visible={visible}
-          error={error}
-          emailError={emailError}
-        />
-        <FormCheckbox visible={visible} setVisible={setVisible}/>
+        <EmailForm />
+        <PasswordForm />
+        <FormCheckbox flipVisible={flipVisible} />
         <Form.Submit asChild>
           <button
             onClick={() => {
               if (!isEmail(email)) {
-                setEmailError([true, { reasons: "invalid" }]);
-                return false;
+                updateEmailError([true, { reasons: "invalid" }]);
+                
               }
               if (password.length < 6) {
-                setPasswordError([true, { reasons: "length" }]);
-                return false;
+                updatePasswordError([true, { reasons: "length" }]);
+                
               }
               if (isEmail(email) && password.length > 6) {
                 setTimeout(async () => {
                   let message = await signInWithEmail(email, password);
                   console.log(message);
-                  setError(message.error);
+                  updateError(message.error);
                 }, 0);
               }
             }}

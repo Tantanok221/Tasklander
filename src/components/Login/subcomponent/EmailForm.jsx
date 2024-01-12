@@ -3,16 +3,21 @@ import isEmail from "validator/lib/isEmail";
 import * as Form from "@radix-ui/react-form";
 import style from "../style.module.css";
 import classNames from "classnames/bind";
+import { useForm } from "../hooks/useForm.js";
 
-export const EmailForm = ({ email, setEmail, emailError, error }) => {
+export const EmailForm = () => {
   const sx = classNames.bind(style);
+  const updateEmail = useForm((state) => state.updateEmail);
+  const email = useForm((state) => state.email);
+  const emailError = useForm((state) => state.emailError);
+  const error = useForm((state) => state.error);
   return (
     <Form.Field className={sx("formField")}>
       <Form.Label className={sx("formLabel")}>Email</Form.Label>
       <Form.Control asChild>
         <input
           placeholder="Enter Your Email"
-          onChange={(value) => setEmail(value.currentTarget.value)}
+          onChange={(value) => updateEmail(value.currentTarget.value)}
           className={sx("input", {
             errorBorder: emailError[0] || error.name,
           })}
@@ -25,7 +30,6 @@ export const EmailForm = ({ email, setEmail, emailError, error }) => {
           className={sx("formMessage", {
             errorText: emailError[1]?.reasons == "invalid",
           })}
-          match="typeMismatch"
         >
           Please provide a valid email
         </div>
@@ -35,7 +39,6 @@ export const EmailForm = ({ email, setEmail, emailError, error }) => {
           className={sx("formMessage", {
             errorText: emailError[1]?.reasons == "invalid" || error?.name,
           })}
-          match="typeMismatch"
         >
           Invalid Password or Email
         </div>

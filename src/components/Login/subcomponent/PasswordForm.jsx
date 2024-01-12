@@ -1,9 +1,16 @@
 import React from 'react'
 import * as Form from "@radix-ui/react-form";
 import style from "../style.module.css";
+import { useForm } from "../hooks/useForm.js";
 import classNames from "classnames/bind";
-export const PasswordForm = ({error,emailError,passwordError,setPassword,password,visible}) => {
+export const PasswordForm = () => {
   const sx = classNames.bind(style);
+  const visible = useForm((state) => state.visible);
+  const updatePassword = useForm((state) => state.updatePassword);
+  const password = useForm((state) => state.password);
+  const error = useForm((state) => state.error);
+  const emailError = useForm((state) => state.emailError);
+  const passwordError = useForm((state) => state.passwordError);
   return (
     <Form.Field className={sx("formField")}>
           <Form.Label className={sx("formLabel")}>Password</Form.Label>
@@ -11,7 +18,7 @@ export const PasswordForm = ({error,emailError,passwordError,setPassword,passwor
             <input
               placeholder="Enter Your Password"
               id="password"
-              onChange={(value) => setPassword(value.currentTarget.value)}
+              onChange={(value) => updatePassword(value.currentTarget.value)}
               minLength="6"
               className={sx("input", { errorBorder: passwordError[0] || error.message === "Invalid login credentials" })}
               type={visible ? "text" : "password"}

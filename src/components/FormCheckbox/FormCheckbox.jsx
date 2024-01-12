@@ -5,12 +5,12 @@ import style from "./style.module.css";
 import { IconContext } from "react-icons";
 import { FaCheck } from "react-icons/fa6";
 
-export const FormCheckbox = ({setVisible,visible}) => {
+export const FormCheckbox = ({flipVisible}) => {
   const sx = classNames.bind(style);
   return (
     <Checkbox.Root
       onCheckedChange={() => {
-        setVisible(!visible);
+        flipVisible();
       }}
       className={sx("checkboxContainer")}
     >
