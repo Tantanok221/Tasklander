@@ -7,4 +7,5 @@
   background: var(--task, #1f1f21);
   border: 2px solid var(--Dark-ObvStroke, #494949);
   border-radius: 0.75rem;
+  margin-top: 1.5rem;
 }
