@@ -1,5 +1,5 @@
 import React from 'react'
-import style from "../style.module.css";
+import style from "../../../styles/Form.module.css";
 import classNames from "classnames/bind";
 
 export const Header = () => {

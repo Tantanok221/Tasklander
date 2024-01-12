@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Form from "@radix-ui/react-form";
-import style from "../style.module.css";
+import style from "../../../styles/Form.module.css";
 import classNames from "classnames/bind";
 import { useForm } from "../hooks/useForm.js";
 

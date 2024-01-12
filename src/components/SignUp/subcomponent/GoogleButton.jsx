@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from "classnames/bind";
-import style from "../style.module.css";
+import style from "../../../styles/Form.module.css";
 import { IconContext } from "react-icons";
 import { FcGoogle } from "react-icons/fc";
 

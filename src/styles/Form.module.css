@@ -1,10 +1,31 @@
+.FooterContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.FooterText {
+  color: var(--gray, #848586);
+  font-family: var(--font);
+  font-size: 1.15rem;
+  font-weight: 500;
+
+  
+}
+
+.FooterHighlight {
+  color: var(--white, #FFFFFF);
+  font-family: var(--font);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
 .container {
   width: 100%;
   border-radius: 0.75rem;
   background: var(--task, #1f1f21);
   display: flex;
   flex-direction: column;
-  padding: 4rem 4.5rem;
+  padding: 2.5rem 4.5rem;
   gap: 2rem;
 }
 
@@ -37,8 +58,8 @@
   justify-content: center;
   align-items: center;
   gap: 3.25rem;
-  border-radius: 0.75rem;
   background: none;
+  border-radius: 0.75rem;
   border: 2px solid var(--Dark-ObvStroke, #494949);
 }
 
@@ -50,31 +71,12 @@
   margin: 0px;
   pointer-events: none;
 }
-.divider {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.or {
-  width: 10%;
-  text-align: center;
-  color: var(--Dark-Gray, #848586);
-  font-family: var(--font);
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-.line {
-  background-color: var(--gray, #848586);
-  height: 1px;
-  width: 45%;
-}
 
 .formContainer {
   width: 100%;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   flex-direction: column;
 }
 
@@ -114,6 +116,7 @@
   font-weight: 500;
 }
 
+
 .errorBorder {
   border: 2px solid #ff0000;
 }
@@ -124,23 +127,4 @@
   color: #ff0000;
 }
 
-.FooterContainer {
-  display: flex;
-  gap: 0.5rem;
-}
 
-.FooterText {
-  color: var(--gray, #848586);
-  font-family: var(--font);
-  font-size: 1.5rem;
-  font-weight: 500;
-
-  
-}
-
-.FooterHighlight {
-  color: var(--white, #FFFFFF);
-  font-family: var(--font);
-  font-size: 1.5rem;
-  font-weight: 700;
-}

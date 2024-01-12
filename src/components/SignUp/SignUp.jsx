@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./style.module.css";
+import style from "../../styles/Form.module.css";
 import classNames from "classnames/bind";
 import { motion } from "framer-motion";
 import * as Form from "@radix-ui/react-form";
@@ -13,6 +13,7 @@ import { useForm } from "./hooks/useForm.js";
 import { FormSubmitButton } from "../FormSubmitButton/FormSubmitButton";
 import { Header } from "./subcomponent/Header.jsx";
 import { signUpNewUser } from "../../helper/supabase.js";
+import { FormFooter } from "./subcomponent/FormFooter.jsx";
 const SignUp = () => {
   const flipVisible = useForm((state) => state.flipVisible);
   const sx = classNames.bind(style);
@@ -31,6 +32,7 @@ const SignUp = () => {
         <PasswordForm />
         <FormCheckbox flipVisible={flipVisible} />
         <FormSubmitButton useForm={useForm} Function={signUpNewUser} text={"Sign Up"} />
+        <FormFooter/>
       </Form.Root>
     </div>
   );

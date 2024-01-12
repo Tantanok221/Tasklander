@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./style.module.css";
+import style from "../../styles/Form.module.css";
 import classNames from "classnames/bind";
 import { motion } from "framer-motion";
 import * as Form from "@radix-ui/react-form";
@@ -36,8 +36,8 @@ const Login = () => {
         <PasswordForm />
         <FormCheckbox flipVisible={flipVisible} />
         <FormSubmitButton useForm={useForm} Function={signInWithEmail} text={"Sign Up"} />
-        <FormFooter/>
       </Form.Root>
+        <FormFooter/>
     </div>
   );
 };

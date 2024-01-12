@@ -1,22 +1,19 @@
 import React from "react";
 import classNames from "classnames/bind";
-import style from "../style.module.css";
+import style from "../../../styles/Form.module.css";
 import { IconContext } from "react-icons";
 import { FcGoogle } from "react-icons/fc";
+import { signInWithGoogle } from "../../../helper/supabase.js";
 
-async function signInWithGoogle() {
-  const message = await supabase.auth.signInWithOAuth({
-    provider: "google",
-  });
-  return message;
-}
+
 
 export const GoogleButton = () => {
   const sx = classNames.bind(style);
+
   return (
     <button
       onClick={() => {
-        signInWithGoogle();
+        let message = signInWithGoogle();
       }}
       className={sx("googleButton")}
     >
