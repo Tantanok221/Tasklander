@@ -53,7 +53,7 @@ const SignUp = () => {
           passwordError={passwordError}
           visible={visible}
         />
-        <FormCheckbox setVisible={setVisible}/>
+        <FormCheckbox visible={visible} setVisible={setVisible}/>
         <Form.Submit asChild>
           <button
             onClick={() => {

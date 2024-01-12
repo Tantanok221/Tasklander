@@ -5,7 +5,7 @@ import style from "./style.module.css";
 import { IconContext } from "react-icons";
 import { FaCheck } from "react-icons/fa6";
 
-export const FormCheckbox = ({setVisible}) => {
+export const FormCheckbox = ({setVisible,visible}) => {
   const sx = classNames.bind(style);
   return (
     <Checkbox.Root
