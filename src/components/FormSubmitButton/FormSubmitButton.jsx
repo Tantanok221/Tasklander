@@ -4,7 +4,8 @@ import * as Form from "@radix-ui/react-form";
 import style from "./style.module.css";
 import isEmail from "validator/lib/isEmail";
 import classNames from "classnames/bind";
-export const FormSubmitButton = ({useForm,text,Function}) => {
+import { useForm } from "../../hooks/useForm.js";
+export const FormSubmitButton = ({text,Function}) => {
   const updatePasswordError = useForm((state) => state.updatePasswordError);
   const updateEmailError = useForm((state) => state.updateEmailError);
   const updateError = useForm((state) => state.updateError);

@@ -4,9 +4,11 @@ import classNames from "classnames/bind";
 import style from "./style.module.css";
 import { IconContext } from "react-icons";
 import { FaCheck } from "react-icons/fa6";
+import { useForm } from "../../hooks/useForm";
 
-export const FormCheckbox = ({flipVisible}) => {
+export const FormCheckbox = () => {
   const sx = classNames.bind(style);
+  const flipVisible = useForm((state) => state.flipVisible);
   return (
     <Checkbox.Root
       onCheckedChange={() => {
