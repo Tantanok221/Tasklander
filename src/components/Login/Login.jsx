@@ -12,22 +12,14 @@ import { EmailForm } from "./subcomponent/EmailForm.jsx";
 import { PasswordForm } from "./subcomponent/PasswordForm.jsx";
 import { useForm } from "./hooks/useForm.js";
 import { Header } from "./subcomponent/Header.jsx";
+import { SubmitButton } from "./subcomponent/SubmitButton.jsx";
 
-async function signInWithEmail(email, password) {
-  const message = await supabase.auth.signInWithPassword({
-    email: email,
-    password: password,
-  });
-  return message;
-}
+
 
 const Login = () => {
-  const updatePasswordError = useForm((state) => state.updatePasswordError);
-  const updateEmailError = useForm((state) => state.updateEmailError);
-  const updateError = useForm((state) => state.updateError);
+  
   const flipVisible = useForm((state) => state.flipVisible);
-  const password = useForm((state) => state.password);
-  const email = useForm((state) => state.email);
+  
   const sx = classNames.bind(style);
   return (
     <div className={sx("container")}>
@@ -44,30 +36,7 @@ const Login = () => {
         <EmailForm />
         <PasswordForm />
         <FormCheckbox flipVisible={flipVisible} />
-        <Form.Submit asChild>
-          <button
-            onClick={() => {
-              if (!isEmail(email)) {
-                updateEmailError([true, { reasons: "invalid" }]);
-                
-              }
-              if (password.length < 6) {
-                updatePasswordError([true, { reasons: "length" }]);
-                
-              }
-              if (isEmail(email) && password.length > 6) {
-                setTimeout(async () => {
-                  let message = await signInWithEmail(email, password);
-                  console.log(message);
-                  updateError(message.error);
-                }, 0);
-              }
-            }}
-            className={sx("formButton")}
-          >
-            Login
-          </button>
-        </Form.Submit>
+        <SubmitButton/>
       </Form.Root>
     </div>
   );
